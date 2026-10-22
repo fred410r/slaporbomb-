@@ -63,7 +63,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .lang{display:flex;padding:3px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:12px;font-weight:700}
 .lang button{padding:5px 9px;border-radius:7px;color:var(--muted)}
 .lang button[aria-pressed="true"]{background:var(--panel-2);color:var(--text)}
-@media (max-width:900px){.nav-links{display:none}.lang{margin-left:auto}}
+@media (max-width:1100px){.nav-links{display:none}.lang{margin-left:auto}}
 @media (max-width:420px){.logo{font-size:15px}.logo .pill{display:none}.nav .btn-sm span{display:none}}
 
 /* ---------- Hero ---------- */
@@ -260,6 +260,44 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 .qs li{padding:14px 18px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid var(--line);font-size:15px;display:flex;gap:12px;align-items:center}
 @media (max-width:900px){.beta{grid-template-columns:1fr;padding:32px 24px}}
 
+
+/* Feedback */
+.fb{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:start}
+.fb-side{padding:34px}
+.fb-side h3{font-family:"Unbounded",sans-serif;font-weight:800;font-size:22px;margin-bottom:10px}
+.fb-side p{color:var(--muted);margin-bottom:22px}
+.fb-side ul{list-style:none;display:grid;gap:12px;margin-bottom:26px}
+.fb-side li{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:15px}
+.fb-side li b{color:var(--text)}
+.fb-form{padding:34px;display:grid;gap:22px}
+.fb-form label,.fb-form legend{display:block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.fb-form fieldset{border:0;padding:0;margin:0;min-width:0}
+.stars{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:6px}
+.stars input{position:absolute;opacity:0;pointer-events:none}
+.stars label{margin:0;font-size:40px;line-height:1;cursor:pointer;color:rgba(255,255,255,.15);transition:color .15s,transform .15s;text-transform:none;letter-spacing:0}
+.stars label:hover,.stars label:hover~label,.stars input:checked~label{color:var(--gold);text-shadow:0 0 18px rgba(255,197,49,.5)}
+.stars label:hover{transform:scale(1.15)}
+.stars input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.rate-txt{font-size:14px;color:var(--gold);min-height:20px;margin-top:6px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{margin:0;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;transition:all .15s}
+.chips input:checked+label{background:rgba(255,197,49,.12);border-color:rgba(255,197,49,.55);color:var(--text)}
+.chips input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
+.fb-form textarea,.fb-form input[type=text]{width:100%;font:inherit;font-size:16px;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .2s,box-shadow .2s}
+.fb-form textarea{min-height:140px;resize:vertical}
+.fb-form textarea:focus,.fb-form input[type=text]:focus{outline:none;border-color:rgba(255,197,49,.6);box-shadow:0 0 0 4px rgba(255,197,49,.12)}
+.fb-row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.count{font-size:12px;color:var(--muted)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.fb-msg{font-size:14px;font-weight:600;min-height:20px}
+.fb-msg.err{color:#ff8a8a}.fb-msg.ok{color:var(--lime)}
+.fb-done{text-align:center;padding:60px 34px}
+.fb-done .big{font-size:56px;margin-bottom:12px}
+.fb-done h3{font-family:"Unbounded",sans-serif;font-weight:800;font-size:26px;margin-bottom:10px}
+.fb-done p{color:var(--muted);margin-bottom:24px}
+@media (max-width:900px){.fb{grid-template-columns:1fr}.fb-side,.fb-form{padding:26px 22px}.stars label{font-size:36px}}
+
 /* FAQ */
 .faq{max-width:820px;margin:0 auto;display:grid;gap:12px}
 .faq details{border-radius:18px;background:var(--panel);border:1px solid var(--line);transition:background .2s}
@@ -305,6 +343,7 @@ footer a:hover{color:var(--text)}
       <li><a href="#maps" data-i18n="nav.maps">Maps</a></li>
       <li><a href="#shop" data-i18n="nav.shop">Shop</a></li>
       <li><a href="#try" data-i18n="nav.try">Try it</a></li>
+      <li><a href="#feedback" data-i18n="nav.fb">Feedback</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="lang" role="group" aria-label="Language">
@@ -510,8 +549,8 @@ footer a:hover{color:var(--text)}
           <h2 class="h" data-i18n="beta.title">Help us build <span class="grad">Slap or Bomb</span></h2>
           <p class="muted" data-i18n="beta.p">The game is still in development, so you might hit bugs or unfinished features. Your honest feedback decides what we fix and add next.</p>
           <div class="cta" style="margin-top:28px">
-            <a class="btn btn-primary js-play" href="#" target="_blank" rel="noopener" data-i18n="beta.cta">Play the beta</a>
-            <a class="btn btn-ghost js-discord" href="#" target="_blank" rel="noopener" data-i18n="beta.discord">Join the Discord</a>
+            <a class="btn btn-primary" href="#feedback" data-i18n="beta.fb">Give feedback</a>
+            <a class="btn btn-ghost js-discord" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.4 18.4 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9 -.3 13.6.1 18.1a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.7ZM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg><span data-i18n="beta.discord">Join the Discord</span></a>
           </div>
         </div>
         <ul class="qs">
@@ -521,6 +560,68 @@ footer a:hover{color:var(--text)}
           <li data-i18n="q4">🧤 Which gloves, bomb skins or maps do you want?</li>
           <li data-i18n="q5">🐛 Found a bug? Tell us what happened and on which device.</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="feedback" style="padding-top:60px">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow" data-i18n="fb.eyebrow">Feedback</span>
+        <h2 class="h" data-i18n="fb.title">Rate the game. <span class="grad">Tell us everything.</span></h2>
+        <p data-i18n="fb.sub">Loved it? Found a bug? Got a crazy idea? Every message is read by the developer.</p>
+      </div>
+      <div class="fb">
+        <aside class="panel fb-side reveal">
+          <h3 data-i18n="fb.side.t">What should I write?</h3>
+          <p data-i18n="fb.side.p">The more specific, the better. Short is fine too.</p>
+          <ul>
+            <li><span>⭐</span><span data-i18n="fb.l1"><b>Rating:</b> how fun is the game right now?</span></li>
+            <li><span>🐛</span><span data-i18n="fb.l2"><b>Bugs:</b> what happened and what were you doing?</span></li>
+            <li><span>💡</span><span data-i18n="fb.l3"><b>Ideas:</b> new maps, gloves, bomb skins, modes…</span></li>
+            <li><span>💬</span><span data-i18n="fb.l4"><b>Anything else:</b> what would make you play more?</span></li>
+          </ul>
+          <a class="btn btn-ghost js-discord" href="#" target="_blank" rel="noopener"><span data-i18n="fb.discord">Or chat with us on Discord</span></a>
+        </aside>
+        <div class="panel reveal d1" id="fbBox">
+          <form class="fb-form" id="fbForm" novalidate>
+            <fieldset>
+              <legend data-i18n="fb.rate">Your rating</legend>
+              <div class="stars">
+                <input type="radio" name="rating" id="r5" value="5"><label for="r5" title="5">★</label>
+                <input type="radio" name="rating" id="r4" value="4"><label for="r4" title="4">★</label>
+                <input type="radio" name="rating" id="r3" value="3"><label for="r3" title="3">★</label>
+                <input type="radio" name="rating" id="r2" value="2"><label for="r2" title="2">★</label>
+                <input type="radio" name="rating" id="r1" value="1"><label for="r1" title="1">★</label>
+              </div>
+              <div class="rate-txt" id="rateTxt" aria-live="polite"></div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n="fb.type">What is it about?</legend>
+              <div class="chips">
+                <input type="radio" name="kind" id="k1" value="Feedback" checked><label for="k1" data-i18n="fb.k1">💬 Feedback</label>
+                <input type="radio" name="kind" id="k2" value="Bug"><label for="k2" data-i18n="fb.k2">🐛 Bug / problem</label>
+                <input type="radio" name="kind" id="k3" value="Idea"><label for="k3" data-i18n="fb.k3">💡 Idea</label>
+                <input type="radio" name="kind" id="k4" value="Other"><label for="k4" data-i18n="fb.k4">✨ Other</label>
+              </div>
+            </fieldset>
+            <div>
+              <label for="fbMsg" data-i18n="fb.msg">Your message</label>
+              <textarea id="fbMsg" name="message" maxlength="1500" data-i18n-ph="fb.msg.ph" placeholder="Tell us what you think…"></textarea>
+              <div class="fb-row"><span></span><span class="count" id="fbCount">0 / 1500</span></div>
+            </div>
+            <div>
+              <label for="fbName" data-i18n="fb.name">Roblox username (optional)</label>
+              <input type="text" id="fbName" name="username" maxlength="40" autocomplete="nickname" data-i18n-ph="fb.name.ph" placeholder="So we can thank you in game">
+            </div>
+            <div class="hp" aria-hidden="true"><label for="fbWeb">Website</label><input type="text" id="fbWeb" name="website" tabindex="-1" autocomplete="off"></div>
+            <div class="fb-row">
+              <div class="fb-msg" id="fbStatus" role="status" aria-live="polite"></div>
+              <button class="btn btn-primary" type="submit" id="fbSend" data-i18n="fb.send">Send feedback</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -550,6 +651,7 @@ footer a:hover{color:var(--text)}
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.2 1 1 17.6 17.8 23 22 6.4 5.2 1Zm9.2 13.6-4.6-1.2 1.2-4.6 4.6 1.2-1.2 4.6Z"/></svg>
           <span data-i18n="cta.playRoblox">Play free on Roblox</span>
         </a>
+        <a class="btn btn-ghost js-discord" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.4 18.4 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9 -.3 13.6.1 18.1a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.7ZM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg><span data-i18n="beta.discord">Join the Discord</span></a>
       </div>
     </div>
   </section>
@@ -558,14 +660,20 @@ footer a:hover{color:var(--text)}
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Slap or Bomb · <span data-i18n="foot.by">Made by</span> <a href="https://www.roblox.com/users/190678475/profile/" target="_blank" rel="noopener">@fred410r</a></span>
-    <span data-i18n="foot.na">Not affiliated with Roblox Corporation.</span>
+    <span><a class="js-discord" href="#" target="_blank" rel="noopener">Discord</a> · <span data-i18n="foot.na">Not affiliated with Roblox Corporation.</span></span>
   </div>
 </footer>
 
 <script>
 // ← Indsæt dine links her
 const ROBLOX_URL  = "https://www.roblox.com/games/107846844939325/slap-or-bomb";
-const DISCORD_URL = "";
+const DISCORD_URL = "https://discord.gg/fc5FvMkdkc";
+
+// Feedback form backend (set ONE of these; see README)
+const FEEDBACK = {
+  googleForm: { action: "", rating: "", kind: "", message: "", username: "" }, // e.g. action: "https://docs.google.com/forms/d/e/XXXX/formResponse", fields: "entry.123456"
+  discordWebhook: ""
+};
 
 document.querySelectorAll(".js-play").forEach(a => a.href = ROBLOX_URL);
 document.querySelectorAll(".js-discord").forEach(a => DISCORD_URL ? a.href = DISCORD_URL : a.remove());
@@ -613,11 +721,12 @@ const DA = {
   "f4.q":"Hvad betyder \"Open Beta\"?","f4.a":"Spillet kan spilles nu, men det bliver stadig bygget. Forvent opdateringer, nyt indhold og en enkelt bug i ny og næ. Din feedback former, hvad der kommer.",
   "f5.q":"Hvordan melder jeg en bug?","f5.a":"Fortæl hvad der skete, hvad du lavede, og hvilken enhed du spillede på. Et screenshot hjælper meget.",
   "final.title":"Lunten er <span class=\"grad\">allerede tændt.</span>","final.p":"Hop ind, tag dine venner med og find ud af, hvem der holder bomben, når den springer.",
-  "foot.by":"Lavet af","nav.shop":"Shop","nav.maps":"Baner","maps.eyebrow":"Baner","maps.title":"Vælg din <span class=\"grad\">slagmark</span>","maps.sub":"Hver bane spilles forskelligt. Lær hjørnerne, genvejene og gemmestederne at kende.","boss.new":"Ny opdatering","boss.t":"Boss Event","boss.p":"En helt ny boss-arena. Gå sammen med alle på serveren og nedlæg den kæmpe Bomb Boss, før den sprænger jer alle i luften.","boss.cta":"Spil Boss Event","m1.t":"Den mørke borg","m1.p":"Uhyggelige tårne og lysende fakler.","m2.t":"Togstationen","m2.p":"Undvig mellem perroner og skinner.","m3.t":"Havnen","m3.p":"En flydende arena midt i havnen.","m4.t":"Forlystelsesparken","m4.p":"Forlystelser, raketter og masser af løb.","m5.t":"Skovarenaen","m5.p":"Træer og broer at gemme sig bag.","m6.t":"Himmeløen","m6.p":"Højt over skyerne. Fald ikke ned.","shop.eyebrow":"Game Passes og shop","shop.title":"Boost dit <span class=\"grad\">kaos</span>","shop.sub":"Game passes, power moves og møntpakker, som du kan købe inde i spillet.","sf.all":"Alle","sf.pass":"Game Passes","sf.power":"Power moves","sf.coins":"Mønter","sf.support":"Støt","shop.note":"Alle køb foregår med Robux inde i Roblox.","shop.ingame":"Se pris i spillet","shop.get":"Køb","foot.na":"Ikke tilknyttet Roblox Corporation."
+  "foot.by":"Lavet af","nav.fb":"Feedback","beta.fb":"Giv feedback","fb.eyebrow":"Feedback","fb.title":"Giv spillet en rating. <span class=\"grad\">Fortæl os alt.</span>","fb.sub":"Elskede du det? Fandt du en bug? Har du en vild idé? Udvikleren læser hver eneste besked.","fb.side.t":"Hvad skal jeg skrive?","fb.side.p":"Jo mere præcist, jo bedre. Kort er også fint.","fb.l1":"<b>Rating:</b> hvor sjovt er spillet lige nu?","fb.l2":"<b>Bugs:</b> hvad skete der, og hvad lavede du?","fb.l3":"<b>Idéer:</b> nye baner, handsker, bombe-skins, modes…","fb.l4":"<b>Alt andet:</b> hvad ville få dig til at spille mere?","fb.discord":"Eller skriv med os på Discord","fb.rate":"Din rating","fb.type":"Hvad handler det om?","fb.k1":"💬 Feedback","fb.k2":"🐛 Bug / problem","fb.k3":"💡 Idé","fb.k4":"✨ Andet","fb.msg":"Din besked","fb.msg.ph":"Fortæl os hvad du synes…","fb.name":"Roblox-brugernavn (valgfrit)","fb.name.ph":"Så vi kan takke dig i spillet","fb.send":"Send feedback","fb.sending":"Sender…","fb.r1":"1/5 · Ikke godt","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Godt","fb.r4":"4/5 · Rigtig godt","fb.r5":"5/5 · Elsker det! 🔥","fb.e.empty":"Giv en rating eller skriv en besked først.","fb.e.short":"Skriv lidt mere, så vi forstår dig (mindst 5 tegn).","fb.e.wait":"Vent lige et øjeblik, før du sender igen.","fb.e.fail":"Noget gik galt. Prøv igen, eller skriv på Discord.","fb.done.t":"Tak for din feedback! 🙌","fb.done.p":"Vi har modtaget din besked. Den hjælper os med at gøre Slap or Bomb bedre.","fb.again":"Send mere feedback","fb.copy":"Feedback-formularen bliver sat op lige nu. Din besked er kopieret, så du kan sætte den ind på vores Discord.","nav.shop":"Shop","nav.maps":"Baner","maps.eyebrow":"Baner","maps.title":"Vælg din <span class=\"grad\">slagmark</span>","maps.sub":"Hver bane spilles forskelligt. Lær hjørnerne, genvejene og gemmestederne at kende.","boss.new":"Ny opdatering","boss.t":"Boss Event","boss.p":"En helt ny boss-arena. Gå sammen med alle på serveren og nedlæg den kæmpe Bomb Boss, før den sprænger jer alle i luften.","boss.cta":"Spil Boss Event","m1.t":"Den mørke borg","m1.p":"Uhyggelige tårne og lysende fakler.","m2.t":"Togstationen","m2.p":"Undvig mellem perroner og skinner.","m3.t":"Havnen","m3.p":"En flydende arena midt i havnen.","m4.t":"Forlystelsesparken","m4.p":"Forlystelser, raketter og masser af løb.","m5.t":"Skovarenaen","m5.p":"Træer og broer at gemme sig bag.","m6.t":"Himmeløen","m6.p":"Højt over skyerne. Fald ikke ned.","shop.eyebrow":"Game Passes og shop","shop.title":"Boost dit <span class=\"grad\">kaos</span>","shop.sub":"Game passes, power moves og møntpakker, som du kan købe inde i spillet.","sf.all":"Alle","sf.pass":"Game Passes","sf.power":"Power moves","sf.coins":"Mønter","sf.support":"Støt","shop.note":"Alle køb foregår med Robux inde i Roblox.","shop.ingame":"Se pris i spillet","shop.get":"Køb","foot.na":"Ikke tilknyttet Roblox Corporation."
 };
-const EN_GAME = {"shop.ingame":"See price in game","shop.get":"Get it","g.ready":"Press start!","g.start":"Start round","g.again":"Play again","g.you":"YOU","g.have":"You have it! SLAP SOMEONE!","g.tick":"Tick tick…","g.passed":"Slapped! 😅","g.next":"💥 BOOM! Next round…","g.win":"🏆 You survived! Winner!","g.lose":"💥 BOOM! You're out after {n} slaps."};
+const EN_GAME = {"fb.sending":"Sending…","fb.r1":"1/5 · Not good","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Good","fb.r4":"4/5 · Really good","fb.r5":"5/5 · Love it! 🔥","fb.e.empty":"Give a rating or write a message first.","fb.e.short":"Write a bit more so we understand you (at least 5 characters).","fb.e.wait":"Hold on a moment before sending again.","fb.e.fail":"Something went wrong. Try again, or tell us on Discord.","fb.done.t":"Thanks for your feedback! 🙌","fb.done.p":"We got your message. It helps us make Slap or Bomb better.","fb.again":"Send more feedback","fb.copy":"The feedback form is being set up right now. Your message was copied so you can paste it in our Discord.","shop.ingame":"See price in game","shop.get":"Get it","g.ready":"Press start!","g.start":"Start round","g.again":"Play again","g.you":"YOU","g.have":"You have it! SLAP SOMEONE!","g.tick":"Tick tick…","g.passed":"Slapped! 😅","g.next":"💥 BOOM! Next round…","g.win":"🏆 You survived! Winner!","g.lose":"💥 BOOM! You're out after {n} slaps."};
 const EN = {};
 document.querySelectorAll("[data-i18n]").forEach(el => EN[el.dataset.i18n] = el.innerHTML);
+document.querySelectorAll("[data-i18n-ph]").forEach(el => EN[el.dataset.i18nPh] = el.placeholder);
 Object.assign(EN, EN_GAME);
 let lang = "en", shopReady = false;
 const t = k => (lang === "da" ? DA : EN)[k] ?? EN[k] ?? k;
@@ -625,6 +734,7 @@ function setLang(l){
   lang = l; document.documentElement.lang = l;
   document.querySelectorAll("[data-i18n]").forEach(el => { const v = t(el.dataset.i18n); if (v) el.innerHTML = v; });
   document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => el.placeholder = t(el.dataset.i18nPh));
   document.querySelector(".player.you").dataset.you = t("g.you");
   try { localStorage.setItem("sob-lang", l); } catch (e) {}
   if (shopReady) renderShop();
@@ -730,6 +840,66 @@ if (!reduced && matchMedia("(pointer: fine)").matches) {
     if (run) raf = requestAnimationFrame(draw);
   };
   new IntersectionObserver(([e]) => { run = e.isIntersecting; if (run) { cancelAnimationFrame(raf); draw(); } }).observe(c);
+})();
+
+
+/* ---------- Feedback form ---------- */
+(() => {
+  const form = document.getElementById("fbForm"); if (!form) return;
+  const box = document.getElementById("fbBox"), msg = document.getElementById("fbMsg"), count = document.getElementById("fbCount");
+  const status = document.getElementById("fbStatus"), send = document.getElementById("fbSend"), rateTxt = document.getElementById("rateTxt");
+  const say = (k, cls) => { status.className = "fb-msg " + (cls || ""); status.textContent = k ? t(k) : ""; };
+  msg.addEventListener("input", () => count.textContent = `${msg.value.length} / 1500`);
+  form.addEventListener("input", () => status.classList.contains("err") && say(""));
+  form.querySelectorAll("input[name=rating]").forEach(r => r.addEventListener("change", () => rateTxt.textContent = t("fb.r" + r.value)));
+  const last = () => { try { return +localStorage.getItem("sob-fb") || 0; } catch (e) { return 0; } };
+
+  async function deliver(d) {
+    const g = FEEDBACK.googleForm, w = FEEDBACK.discordWebhook;
+    if (g && g.action) {
+      const body = new URLSearchParams();
+      if (g.rating) body.append(g.rating, d.rating || "");
+      if (g.kind) body.append(g.kind, d.kind);
+      if (g.message) body.append(g.message, d.message);
+      if (g.username) body.append(g.username, d.username);
+      await fetch(g.action, { method: "POST", mode: "no-cors", body });   // Google Forms gives an opaque response
+      return true;
+    }
+    if (w) {
+      const stars = d.rating ? "⭐".repeat(d.rating) + ` (${d.rating}/5)` : "no rating";
+      const r = await fetch(w, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+        username: "Website feedback", allowed_mentions: { parse: [] },
+        embeds: [{ title: `${d.kind} · ${stars}`, description: d.message.slice(0, 4000) || "(no message)", color: 16758065,
+                   footer: { text: d.username ? "Roblox: " + d.username : "Anonymous" }, timestamp: new Date().toISOString() }]
+      }) });
+      return r.ok;
+    }
+    return null;   // no backend configured yet
+  }
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (form.website.value) return;   // bot honeypot
+    const d = { rating: +(form.querySelector("input[name=rating]:checked") || {}).value || 0, kind: form.kind.value,
+                message: msg.value.trim(), username: form.username.value.trim() };
+    if (!d.rating && !d.message) return say("fb.e.empty", "err");
+    if (d.message && d.message.length < 5) return say("fb.e.short", "err");
+    if (Date.now() - last() < 30000) return say("fb.e.wait", "err");
+    send.disabled = true; send.textContent = t("fb.sending"); say("");
+    let ok;
+    try { ok = await deliver(d); } catch (err) { ok = false; }
+    send.disabled = false; send.textContent = t("fb.send");
+    if (ok === null) {
+      const text = `${d.kind}${d.rating ? " · " + d.rating + "/5" : ""}\n${d.message}${d.username ? "\n— " + d.username : ""}`;
+      try { await navigator.clipboard.writeText(text); } catch (err) {}
+      say("fb.copy", "ok"); if (DISCORD_URL) window.open(DISCORD_URL, "_blank", "noopener");
+      return;
+    }
+    if (!ok) return say("fb.e.fail", "err");
+    try { localStorage.setItem("sob-fb", Date.now()); } catch (err) {}
+    box.innerHTML = `<div class="fb-done"><div class="big">🎉</div><h3>${t("fb.done.t")}</h3><p>${t("fb.done.p")}</p><button class="btn btn-ghost" id="fbAgain">${t("fb.again")}</button></div>`;
+    document.getElementById("fbAgain").onclick = () => { location.hash = "feedback"; location.reload(); };
+  });
 })();
 
 /* ---------- Mini game ---------- */
