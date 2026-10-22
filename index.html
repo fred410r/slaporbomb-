@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slap or Bomb | Roblox</title>
+<meta name="description" content="Slap or Bomb is a chaotic Roblox party game. Slap the bomb onto someone else before it explodes and be the last player standing. Open Beta, free to play.">
+<meta name="theme-color" content="#070a17">
+<meta property="og:title" content="Slap or Bomb | Open Beta on Roblox">
+<meta property="og:description" content="Slap it. Pass it. Don't be holding it when it blows. Play free on Roblox.">
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preload" as="image" href="assets/key-art-640.webp" imagesrcset="assets/key-art-640.webp 640w, assets/key-art-1254.webp 1254w" imagesizes="(min-width: 980px) 520px, 88vw" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070a17; --bg-2:#0c1230; --panel:rgba(255,255,255,.045); --panel-2:rgba(255,255,255,.08);
+  --line:rgba(255,255,255,.10); --text:#eef1ff; --muted:#a3abcf;
+  --gold:#ffc531; --orange:#ff7a18; --red:#ff3d3d; --blue:#3d7bff; --lime:#a6ff3d;
+  --grad:linear-gradient(135deg,#ffe066 0%,var(--gold) 30%,var(--orange) 70%,var(--red) 100%);
+  --r:22px; --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.h{font-family:"Unbounded",system-ui,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.02}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--grad);border-radius:2px}
+.muted{color:var(--muted)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:10px}
+
+/* ---------- Buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Unbounded",sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em;padding:16px 26px;border-radius:14px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s}
+.btn-primary{background:var(--grad);color:#1a0d00;box-shadow:0 10px 30px -8px rgba(255,122,24,.65),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-primary::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);background-size:250% 100%;background-position:120% 0;transition:background-position .7s var(--ease)}
+.btn-primary:hover::after{background-position:-20% 0}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -8px rgba(255,122,24,.8),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-ghost{background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--panel-2);transform:translateY(-2px)}
+.btn-sm{padding:10px 16px;font-size:13px;border-radius:11px}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(7,10,23,.72);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:70px}
+.logo{white-space:nowrap;display:flex;align-items:center;gap:10px;font-family:"Unbounded",sans-serif;font-weight:900;font-size:17px;letter-spacing:-.01em}
+.logo img{width:34px;height:34px;border-radius:9px;box-shadow:0 0 0 1px var(--line)}
+.pill{font-family:"Inter",sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(166,255,61,.12);color:var(--lime);border:1px solid rgba(166,255,61,.3)}
+.nav-links{display:flex;gap:26px;margin-left:auto;list-style:none;font-size:14px;font-weight:500}
+.nav-links a{color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.lang{display:flex;padding:3px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:12px;font-weight:700}
+.lang button{padding:5px 9px;border-radius:7px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--panel-2);color:var(--text)}
+@media (max-width:900px){.nav-links{display:none}.lang{margin-left:auto}}
+@media (max-width:420px){.logo{font-size:15px}.logo .pill{display:none}.nav .btn-sm span{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(42% 50% at 72% 46%,rgba(255,122,24,.32),transparent 70%),
+    radial-gradient(40% 45% at 20% 20%,rgba(61,123,255,.28),transparent 70%),
+    radial-gradient(60% 60% at 50% 120%,rgba(255,61,61,.25),transparent 70%),
+    var(--bg)}
+.hero-bg::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(70% 60% at 50% 40%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(70% 60% at 50% 40%,#000 20%,transparent 75%);opacity:.5}
+#sparks{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(54px,8.6vw,118px);margin:20px 0 22px}
+.hero h1 .or{display:inline-block;font-size:.42em;vertical-align:middle;color:var(--muted);font-weight:600;margin:0 .1em;transform:translateY(-.15em)}
+.hero .lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:540px;margin-bottom:34px}
+.hero .lead strong{color:var(--text)}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.trust{display:flex;flex-wrap:wrap;gap:22px;margin-top:38px;font-size:13px;color:var(--muted)}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust i{font-style:normal;width:26px;height:26px;display:grid;place-items:center;border-radius:8px;background:var(--panel);border:1px solid var(--line);font-size:13px}
+
+.stage{position:relative;justify-self:center;width:min(520px,100%);perspective:1000px}
+.stage .glow{position:absolute;inset:-12%;z-index:-1;border-radius:50%;background:conic-gradient(from 0deg,var(--gold),var(--red),var(--blue),var(--lime),var(--gold));filter:blur(60px);opacity:.45;animation:spin 14s linear infinite}
+.card3d{position:relative;border-radius:28px;padding:10px;background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);box-shadow:0 40px 80px -30px rgba(0,0,0,.8);transform-style:preserve-3d;transition:transform .5s var(--ease);animation:float 6s ease-in-out infinite}
+.card3d img{width:100%;height:auto;aspect-ratio:1;border-radius:20px}
+.chip{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:rgba(12,18,48,.78);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:13px;font-weight:600;box-shadow:0 20px 40px -20px rgba(0,0,0,.8);transform:translateZ(40px)}
+.chip b{font-family:"Unbounded",sans-serif;font-size:15px;display:block;line-height:1.1}
+.chip small{color:var(--muted);font-weight:500}
+.chip.c1{left:-34px;top:16%}
+.chip.c2{right:-26px;bottom:12%}
+.timer{position:relative;width:42px;height:42px;flex:none}
+.timer svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer circle{fill:none;stroke-width:4}
+.timer .t-bg{stroke:rgba(255,255,255,.12)}
+.timer .t-fg{stroke:url(#tg);stroke-linecap:round;stroke-dasharray:113;animation:fuse 5s linear infinite}
+.timer span{position:absolute;inset:0;display:grid;place-items:center;font-size:16px}
+@keyframes fuse{from{stroke-dashoffset:0}to{stroke-dashoffset:113}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -12px}}
+.scroll-hint{position:absolute;left:50%;bottom:22px;translate:-50% 0;width:24px;height:38px;border:2px solid var(--line);border-radius:14px}
+.scroll-hint::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--gold);animation:wheel 1.8s ease-in-out infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+@media (max-width:980px){
+  .hero{padding-top:96px}
+  .hero .wrap{grid-template-columns:1fr;text-align:center;gap:40px}
+  .hero .lead{margin-inline:auto}
+  .cta,.trust{justify-content:center}
+  .stage{width:min(420px,86%)}
+  .chip.c1{left:-14px;top:auto;bottom:-22px}.chip.c2{display:none}
+  .scroll-hint{display:none}
+}
+
+/* ---------- Marquee ---------- */
+.marquee{border-block:1px solid var(--line);background:linear-gradient(90deg,rgba(255,197,49,.06),rgba(255,61,61,.06));overflow:hidden;padding:18px 0}
+.marquee-track{display:flex;width:max-content;animation:marq 32s linear infinite}
+.marquee span{font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(20px,3vw,30px);letter-spacing:-.01em;padding:0 28px;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35)}
+.marquee span:nth-child(3n+1){color:var(--text);-webkit-text-stroke:0}
+.marquee span:nth-child(3n+2){-webkit-text-stroke:0}
+.marquee span:nth-child(3n+2){background:var(--grad);-webkit-background-clip:text;background-clip:text}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- Sections ---------- */
+section{padding:120px 0;position:relative}
+.head{max-width:720px;margin-bottom:60px}
+.head.center{text-align:center;margin-inline:auto}
+.head h2{font-size:clamp(34px,5vw,60px);margin:16px 0 18px}
+.head p{color:var(--muted);font-size:18px}
+@media (max-width:700px){section{padding:84px 0}.head{margin-bottom:40px}}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);position:relative;overflow:hidden}
+.panel::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(160deg,rgba(255,255,255,.18),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+
+/* How a round works */
+.loop{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+.step{padding:28px 24px 30px}
+.step .num{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:26px;margin-bottom:22px;background:var(--bg-2);border:1px solid var(--line);position:relative;box-shadow:0 0 0 6px var(--bg)}
+.step .num em{position:absolute;top:-8px;right:-8px;font-style:normal;font-family:"Unbounded",sans-serif;font-size:11px;font-weight:800;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:var(--grad);color:#1a0d00}
+.step h3{font-family:"Unbounded",sans-serif;font-size:19px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
+.step p{color:var(--muted);font-size:15px}
+@media (max-width:980px){.loop{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.loop{grid-template-columns:1fr}}
+
+/* Rules + controls */
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:22px}
+.rules{padding:34px}
+.rules h3,.controls h3{font-family:"Unbounded",sans-serif;font-size:20px;font-weight:800;margin-bottom:20px}
+.rules ul{list-style:none;display:grid;gap:14px}
+.rules li{display:flex;gap:14px;align-items:flex-start;color:var(--muted)}
+.rules li b{color:var(--text);font-weight:600}
+.rules li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:7px;background:var(--grad) center/12px no-repeat;-webkit-mask:none}
+.rules li::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%231a0d00' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat,var(--grad)}
+.controls{padding:34px}
+.tabs{display:flex;gap:6px;padding:4px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid var(--line);margin-bottom:20px}
+.tabs button{flex:1;padding:9px 10px;border-radius:9px;font-size:13px;font-weight:600;color:var(--muted);transition:background .2s,color .2s}
+.tabs button[aria-selected="true"]{background:var(--panel-2);color:var(--text)}
+.keys{display:grid;gap:12px}
+.keys div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:14px}
+.keys span{color:var(--muted)}
+kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9px;border-radius:7px;background:linear-gradient(#232a52,#161b3a);border:1px solid rgba(255,255,255,.14);border-bottom-width:3px;white-space:nowrap}
+@media (max-width:900px){.split{grid-template-columns:1fr}.rules,.controls{padding:26px}}
+
+/* Showcase bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(220px,auto);gap:18px}
+.tile{padding:30px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .4s var(--ease),border-color .3s}
+.tile:hover{transform:translateY(-4px);border-color:rgba(255,197,49,.35)}
+.tile .ico{font-size:42px;margin-bottom:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5))}
+.tile h3{font-family:"Unbounded",sans-serif;font-size:22px;font-weight:800;margin:18px 0 8px;letter-spacing:-.01em}
+.tile p{color:var(--muted);font-size:15px;max-width:420px}
+.tile.t1{grid-column:span 4;grid-row:span 2;background:linear-gradient(180deg,rgba(7,10,23,0) 30%,rgba(7,10,23,.92) 100%),var(--scene) center/cover no-repeat;min-height:440px}
+.tile.t1 h3{font-size:clamp(26px,3vw,36px)}
+.tile.t2{grid-column:span 2;background:radial-gradient(80% 80% at 80% 0%,rgba(255,197,49,.22),transparent 60%),var(--panel)}
+.tile.t3{grid-column:span 2;background:radial-gradient(80% 80% at 80% 0%,rgba(255,61,61,.22),transparent 60%),var(--panel)}
+.tile.t4{grid-column:span 3;background:radial-gradient(80% 80% at 90% 0%,rgba(61,123,255,.25),transparent 60%),var(--panel)}
+.tile.t5{grid-column:span 3;background:radial-gradient(80% 80% at 90% 0%,rgba(166,255,61,.18),transparent 60%),var(--panel)}
+.tag{display:inline-block;width:max-content;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--muted)}
+@media (max-width:980px){.bento{grid-template-columns:1fr 1fr}.tile.t1{grid-column:span 2;grid-row:auto;min-height:360px}.tile.t2,.tile.t3,.tile.t4,.tile.t5{grid-column:span 1}}
+@media (max-width:600px){.bento{grid-template-columns:1fr}.tile.t1,.tile.t2,.tile.t3,.tile.t4,.tile.t5{grid-column:auto}}
+
+
+
+/* Maps */
+.boss{display:grid;grid-template-columns:1.45fr 1fr;align-items:center;gap:0;margin-bottom:22px;border-color:rgba(255,122,24,.35);background:radial-gradient(60% 100% at 100% 50%,rgba(255,61,61,.18),transparent 70%),var(--panel)}
+.boss img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9}
+.boss .txt{padding:34px 38px}
+.boss h3{font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,44px);line-height:1.05;margin:14px 0 12px;letter-spacing:-.02em}
+.boss p{color:var(--muted);margin-bottom:24px}
+.new{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:var(--red);color:#fff;box-shadow:0 0 0 4px rgba(255,61,61,.2)}
+.new::before{content:"";width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.maps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.map{position:relative;aspect-ratio:2/1;padding:0}
+.map img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.map:hover img{transform:scale(1.07)}
+.map::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(7,10,23,.92));pointer-events:none}
+.map .cap{position:absolute;left:18px;right:18px;bottom:14px;z-index:1}
+.map h3{font-family:"Unbounded",sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em}
+.map span{font-size:13px;color:var(--muted)}
+@media (max-width:980px){.boss{grid-template-columns:1fr}.boss .txt{padding:26px 24px 30px}.maps{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.maps{grid-template-columns:1fr}}
+
+/* Shop */
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:-24px 0 40px}
+.filters button{padding:10px 18px;border-radius:99px;font-size:14px;font-weight:600;color:var(--muted);background:var(--panel);border:1px solid var(--line);transition:all .2s}
+.filters button:hover{color:var(--text)}
+.filters button[aria-pressed="true"]{color:#1a0d00;background:var(--grad);border-color:transparent}
+.shop{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.item{display:flex;flex-direction:column;padding:14px 14px 18px;transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.item:hover{transform:translateY(-6px);border-color:rgba(255,197,49,.4);box-shadow:0 24px 50px -24px rgba(255,122,24,.55)}
+.item .pic{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;background:var(--bg-2)}
+.item .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.item:hover .pic img{transform:scale(1.06)}
+.item .kind{position:absolute;top:10px;left:10px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;background:rgba(7,10,23,.75);backdrop-filter:blur(6px);border:1px solid var(--line)}
+.item h3{font-family:"Unbounded",sans-serif;font-size:17px;font-weight:800;margin:16px 4px 6px;letter-spacing:-.01em}
+.item p{color:var(--muted);font-size:14px;margin:0 4px 16px;flex:1}
+.item .buy{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 4px}
+.price{font-family:"Unbounded",sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;gap:6px}
+.price svg{width:16px;height:16px}
+.price.tbd{font-family:"Inter",sans-serif;font-weight:600;font-size:13px;color:var(--muted)}
+.item.hot{grid-column:span 2;grid-row:span 2;padding:18px 18px 24px;background:radial-gradient(70% 60% at 50% 0%,rgba(255,122,24,.22),transparent 70%),var(--panel);border-color:rgba(255,197,49,.35)}
+.item.hot h3{font-size:clamp(22px,2.4vw,30px)}
+.item.hot p{font-size:16px}
+.item.hot .kind{background:var(--grad);color:#1a0d00;border:0}
+.shop-note{text-align:center;color:var(--muted);font-size:13px;margin-top:28px}
+@media (max-width:1000px){.shop{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.shop{grid-template-columns:repeat(2,1fr);gap:12px}.item{padding:10px 10px 14px}.item h3{font-size:15px;margin:12px 2px 4px}.item p{font-size:13px;margin:0 2px 12px}.item .buy{margin:0 2px;flex-wrap:wrap}.item .btn-sm{padding:8px 12px;font-size:12px}}
+
+/* Mini game */
+.arena{max-width:760px;margin:0 auto;padding:40px 28px 36px;text-align:center}
+.arena.boom{animation:shake .45s}
+.status{font-family:"Unbounded",sans-serif;font-weight:800;font-size:clamp(18px,2.4vw,24px);min-height:36px}
+.players{display:flex;justify-content:center;gap:clamp(12px,4vw,36px);margin:34px 0 14px}
+.player{position:relative;width:clamp(62px,15vw,88px);aspect-ratio:1;border-radius:22px;display:grid;place-items:center;font-size:clamp(28px,7vw,40px);background:var(--bg-2);border:1px solid var(--line);transition:transform .2s var(--ease),box-shadow .2s,opacity .3s}
+.player:not(.out):hover{transform:translateY(-4px)}
+.player.p1{box-shadow:inset 0 -6px 0 #f2c200}.player.p2{box-shadow:inset 0 -6px 0 var(--red)}.player.p3{box-shadow:inset 0 -6px 0 var(--blue)}.player.p4{box-shadow:inset 0 -6px 0 var(--lime)}
+.player.has{transform:translateY(-10px) scale(1.06);border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,197,49,.25),0 18px 40px -10px rgba(255,122,24,.7)}
+.player.has::after{content:"💣";position:absolute;top:-34px;font-size:30px;animation:wobble .28s ease-in-out infinite alternate}
+.player.out{opacity:.3;filter:grayscale(1);cursor:default}
+.player.you::before{content:attr(data-you);position:absolute;bottom:-26px;font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--gold)}
+.bar{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin:44px 0 24px}
+.bar span{display:block;height:100%;background:var(--grad);transform-origin:left;box-shadow:0 0 20px var(--orange)}
+.btn:disabled{opacity:.45;pointer-events:none}
+@keyframes wobble{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+@keyframes shake{0%,100%{transform:none}20%{transform:translate(-8px,4px)}40%{transform:translate(8px,-4px)}60%{transform:translate(-6px,-3px)}80%{transform:translate(6px,3px)}}
+
+/* Beta */
+.beta{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:56px;align-items:center;background:radial-gradient(60% 90% at 0% 0%,rgba(166,255,61,.14),transparent 60%),radial-gradient(60% 90% at 100% 100%,rgba(61,123,255,.18),transparent 60%),var(--panel)}
+.beta h2{font-size:clamp(30px,4vw,48px);margin:16px 0}
+.beta .eyebrow{color:var(--lime)}
+.beta .eyebrow::before{background:var(--lime)}
+.qs{list-style:none;display:grid;gap:10px}
+.qs li{padding:14px 18px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid var(--line);font-size:15px;display:flex;gap:12px;align-items:center}
+@media (max-width:900px){.beta{grid-template-columns:1fr;padding:32px 24px}}
+
+/* FAQ */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:12px}
+.faq details{border-radius:18px;background:var(--panel);border:1px solid var(--line);transition:background .2s}
+.faq details[open]{background:var(--panel-2)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 26px;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--gold);transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 26px 22px;color:var(--muted)}
+
+/* Final CTA */
+.final{text-align:center;overflow:hidden;isolation:isolate}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 55% at 50% 50%,rgba(7,10,23,.82),rgba(7,10,23,.55) 100%),linear-gradient(180deg,var(--bg) 0%,transparent 35%,rgba(7,10,23,.7) 100%),var(--scene) center 30%/cover no-repeat}
+.final h2{font-size:clamp(40px,7vw,96px);margin-bottom:22px}
+.final p{color:var(--muted);font-size:19px;margin:0 auto 36px;max-width:560px}
+.final .cta{justify-content:center}
+
+footer{border-top:1px solid var(--line);padding:34px 0;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+footer a:hover{color:var(--text)}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body style="--scene:url(assets/scene-1254.webp)">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#ffc531"/><stop offset="1" stop-color="#ff3d3d"/></linearGradient></defs></svg>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="assets/favicon.png" alt="" width="34" height="34">SLAP OR BOMB <span class="pill">Beta</span></a>
+    <ul class="nav-links">
+      <li><a href="#how" data-i18n="nav.how">How it works</a></li>
+      <li><a href="#features" data-i18n="nav.features">Features</a></li>
+      <li><a href="#maps" data-i18n="nav.maps">Maps</a></li>
+      <li><a href="#shop" data-i18n="nav.shop">Shop</a></li>
+      <li><a href="#try" data-i18n="nav.try">Try it</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="en" aria-pressed="true">EN</button>
+      <button data-lang="da" aria-pressed="false">DA</button>
+    </div>
+    <a class="btn btn-primary btn-sm js-play" href="#" target="_blank" rel="noopener">▶ <span data-i18n="cta.play">Play</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <canvas id="sparks" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" data-i18n="hero.eyebrow">Roblox party game · Open Beta</span>
+      <h1 class="h"><span class="grad">SLAP</span> <span class="or">or</span><br>BOMB</h1>
+      <p class="lead" data-i18n="hero.lead">The fuse is lit and everyone's running. <strong>Slap the bomb onto someone else</strong> before it explodes in your hands. Dodge, juke, and be the last one standing.</p>
+      <div class="cta">
+        <a class="btn btn-primary js-play" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.2 1 1 17.6 17.8 23 22 6.4 5.2 1Zm9.2 13.6-4.6-1.2 1.2-4.6 4.6 1.2-1.2 4.6Z"/></svg>
+          <span data-i18n="cta.playRoblox">Play free on Roblox</span>
+        </a>
+        <a class="btn btn-ghost" href="#how" data-i18n="cta.how">How it works</a>
+      </div>
+      <div class="trust">
+        <span><i>🆓</i><span data-i18n="trust.free">Free to play</span></span>
+        <span><i>👥</i><span data-i18n="trust.friends">Play with friends</span></span>
+        <span><i>📱</i><span data-i18n="trust.devices">PC, mobile & console</span></span>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="glow"></div>
+      <div class="card3d" id="card3d">
+        <picture>
+          <source type="image/webp" srcset="assets/key-art-640.webp 640w, assets/key-art-1254.webp 1254w" sizes="(min-width: 980px) 520px, 88vw">
+          <img src="assets/key-art-640.jpg" srcset="assets/key-art-640.jpg 640w, assets/key-art-1254.jpg 1254w" sizes="(min-width: 980px) 520px, 88vw" width="1254" height="1254" alt="Two blocky Roblox characters fighting over a lit bomb" fetchpriority="high">
+        </picture>
+        <div class="chip c1">
+          <div class="timer"><svg viewBox="0 0 42 42"><circle class="t-bg" cx="21" cy="21" r="18"/><circle class="t-fg" cx="21" cy="21" r="18"/></svg><span>💣</span></div>
+          <div><b data-i18n="chip.fuse">Fuse lit</b><small data-i18n="chip.fuseSub">Pass it. Now.</small></div>
+        </div>
+        <div class="chip c2"><span style="font-size:26px">🖐</span><div><b data-i18n="chip.slap">SLAP!</b><small data-i18n="chip.slapSub">Bomb passed</small></div></div>
+      </div>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#how" aria-label="Scroll down"></a>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>SLAP</span><span>PASS</span><span>DODGE</span><span>BOOM</span><span>SURVIVE</span><span>WIN</span>
+    <span>SLAP</span><span>PASS</span><span>DODGE</span><span>BOOM</span><span>SURVIVE</span><span>WIN</span>
+    <span>SLAP</span><span>PASS</span><span>DODGE</span><span>BOOM</span><span>SURVIVE</span><span>WIN</span>
+    <span>SLAP</span><span>PASS</span><span>DODGE</span><span>BOOM</span><span>SURVIVE</span><span>WIN</span>
+  </div>
+</div>
+
+<main>
+  <section id="how">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow" data-i18n="how.eyebrow">How it works</span>
+        <h2 class="h" data-i18n="how.title">One bomb. One rule.<br><span class="grad">Don't be holding it.</span></h2>
+        <p data-i18n="how.sub">Every round is short, loud and chaotic. Here is exactly what happens from the moment you spawn.</p>
+      </div>
+
+      <div class="loop">
+        <article class="panel step reveal"><div class="num">🏟️<em>1</em></div><h3 data-i18n="s1.t">Drop into the arena</h3><p data-i18n="s1.p">All players spawn together in a blocky arena. Get moving and find some space. The round is about to start.</p></article>
+        <article class="panel step reveal d1"><div class="num">💣<em>2</em></div><h3 data-i18n="s2.t">The bomb is lit</h3><p data-i18n="s2.p">One random player gets the bomb and the fuse starts burning. Nobody knows exactly when it will go off.</p></article>
+        <article class="panel step reveal d2"><div class="num">🖐<em>3</em></div><h3 data-i18n="s3.t">Slap to pass it</h3><p data-i18n="s3.p">Holding the bomb? Chase someone down and slap them. The bomb jumps to them, and now they're the one panicking.</p></article>
+        <article class="panel step reveal d3"><div class="num">💥<em>4</em></div><h3 data-i18n="s4.t">BOOM. Last one wins</h3><p data-i18n="s4.p">When the fuse runs out, whoever holds the bomb is out. New bomb, new round, until one survivor is left.</p></article>
+      </div>
+
+      <div class="split">
+        <div class="panel rules reveal">
+          <h3 data-i18n="rules.t">The rules & pro tips</h3>
+          <ul>
+            <li><span data-i18n="r1"><b>Never stand still.</b> A player standing still is an easy target for a slap.</span></li>
+            <li><span data-i18n="r2"><b>Watch the fuse.</b> The closer it is to zero, the more desperate everyone gets.</span></li>
+            <li><span data-i18n="r3"><b>Use the map.</b> Walls, ramps and corners can save you, or trap you.</span></li>
+            <li><span data-i18n="r4"><b>Slap fast, run faster.</b> Right after you pass the bomb, get away before it comes back.</span></li>
+            <li><span data-i18n="r5"><b>Last one standing wins</b> the match. Then you do it all again.</span></li>
+          </ul>
+        </div>
+        <div class="panel controls reveal d1">
+          <h3 data-i18n="ctrl.t">Controls</h3>
+          <div class="tabs" role="tablist">
+            <button role="tab" aria-selected="true" data-tab="pc">PC</button>
+            <button role="tab" aria-selected="false" data-tab="mobile" data-i18n="tab.mobile">Mobile</button>
+            <button role="tab" aria-selected="false" data-tab="console" data-i18n="tab.console">Console</button>
+          </div>
+          <div class="keys" data-panel="pc">
+            <div><span data-i18n="k.move">Move</span><kbd>W A S D</kbd></div>
+            <div><span data-i18n="k.jump">Jump</span><kbd>Space</kbd></div>
+            <div><span data-i18n="k.slap">Slap</span><kbd data-i18n="k.click">Left click</kbd></div>
+            <div><span data-i18n="k.cam">Camera</span><kbd data-i18n="k.rmb">Right mouse</kbd></div>
+          </div>
+          <div class="keys" data-panel="mobile" hidden>
+            <div><span data-i18n="k.move">Move</span><kbd data-i18n="k.stick">Joystick</kbd></div>
+            <div><span data-i18n="k.jump">Jump</span><kbd data-i18n="k.jumpBtn">Jump button</kbd></div>
+            <div><span data-i18n="k.slap">Slap</span><kbd data-i18n="k.slapBtn">Slap button</kbd></div>
+            <div><span data-i18n="k.cam">Camera</span><kbd data-i18n="k.swipe">Swipe</kbd></div>
+          </div>
+          <div class="keys" data-panel="console" hidden>
+            <div><span data-i18n="k.move">Move</span><kbd>Left stick</kbd></div>
+            <div><span data-i18n="k.jump">Jump</span><kbd>A / ✕</kbd></div>
+            <div><span data-i18n="k.slap">Slap</span><kbd>RT / R2</kbd></div>
+            <div><span data-i18n="k.cam">Camera</span><kbd>Right stick</kbd></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="padding-top:40px">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow" data-i18n="feat.eyebrow">Features</span>
+        <h2 class="h" data-i18n="feat.title">Built for <span class="grad">pure chaos</span></h2>
+        <p data-i18n="feat.sub">Quick to learn, impossible to play calmly. Grab your friends and find out who panics first.</p>
+      </div>
+      <div class="bento">
+        <div class="panel tile t1 reveal">
+          <span class="tag" data-i18n="t1.tag">Multiplayer</span>
+          <h3 data-i18n="t1.t">Party chaos with friends</h3>
+          <p data-i18n="t1.p">Join a server with friends or strangers. Every round turns into a screaming chase the second the fuse is lit.</p>
+        </div>
+        <div class="panel tile t2 reveal d1"><div class="ico">🧤</div><h3 data-i18n="t2.t">Gloves</h3><p data-i18n="t2.p">Slap in style. Pick the glove that fits your playstyle.</p></div>
+        <div class="panel tile t3 reveal d2"><div class="ico">💣</div><h3 data-i18n="t3.t">Bomb skins</h3><p data-i18n="t3.p">Make the bomb yours, so everyone knows who to blame.</p></div>
+        <div class="panel tile t4 reveal"><div class="ico">🕺</div><h3 data-i18n="t4.t">Dances</h3><p data-i18n="t4.p">Survived the blast? Celebrate in front of everyone who didn't.</p></div>
+        <div class="panel tile t5 reveal d1"><div class="ico">🗺️</div><h3 data-i18n="t5.t">Maps & modes</h3><p data-i18n="t5.p">Colorful blocky arenas full of ramps, walls and hiding spots. More on the way.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="maps" style="padding-top:40px">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow" data-i18n="maps.eyebrow">Maps</span>
+        <h2 class="h" data-i18n="maps.title">Pick your <span class="grad">battlefield</span></h2>
+        <p data-i18n="maps.sub">Every map plays differently. Learn the corners, the shortcuts and the hiding spots.</p>
+      </div>
+      <article class="panel boss reveal">
+        <picture>
+          <source media="(max-width: 600px)" srcset="assets/maps/boss-sm.webp">
+          <img src="assets/maps/boss.webp" alt="Slap or Bomb Boss Event arena" width="1280" height="720" loading="lazy" decoding="async">
+        </picture>
+        <div class="txt">
+          <h3 data-i18n="boss.t">Boss Event</h3>
+          <p data-i18n="boss.p">A brand new boss arena. Team up with everyone in the server and take down the giant Bomb Boss before it blows you all up.</p>
+          <a class="btn btn-primary js-play" href="#" target="_blank" rel="noopener" data-i18n="boss.cta">Play the Boss Event</a>
+        </div>
+      </article>
+      <div class="maps">
+        <article class="panel map reveal"><img src="assets/maps/castle.webp" alt="" width="960" height="480" loading="lazy" decoding="async"><div class="cap"><h3 data-i18n="m1.t">Dark Castle</h3><span data-i18n="m1.p">Spooky towers and glowing torches.</span></div></article>
+        <article class="panel map reveal d1"><img src="assets/maps/station.webp" alt="" width="960" height="480" loading="lazy" decoding="async"><div class="cap"><h3 data-i18n="m2.t">Train Station</h3><span data-i18n="m2.p">Dodge between platforms and tracks.</span></div></article>
+        <article class="panel map reveal d2"><img src="assets/maps/harbor.webp" alt="" width="960" height="480" loading="lazy" decoding="async"><div class="cap"><h3 data-i18n="m3.t">Harbor</h3><span data-i18n="m3.p">A floating arena in the middle of the bay.</span></div></article>
+        <article class="panel map reveal"><img src="assets/maps/park.webp" alt="" width="960" height="480" loading="lazy" decoding="async"><div class="cap"><h3 data-i18n="m4.t">Theme Park</h3><span data-i18n="m4.p">Rides, rockets and a lot of running.</span></div></article>
+        <article class="panel map reveal d1"><img src="assets/maps/forest.webp" alt="" width="960" height="480" loading="lazy" decoding="async"><div class="cap"><h3 data-i18n="m5.t">Forest Arena</h3><span data-i18n="m5.p">Trees and bridges to hide behind.</span></div></article>
+        <article class="panel map reveal d2"><img src="assets/maps/sky.webp" alt="" width="960" height="480" loading="lazy" decoding="async"><div class="cap"><h3 data-i18n="m6.t">Sky Island</h3><span data-i18n="m6.p">High above the clouds. Don't fall off.</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="shop" style="padding-top:40px">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow" data-i18n="shop.eyebrow">Game Passes & Shop</span>
+        <h2 class="h" data-i18n="shop.title">Power up your <span class="grad">chaos</span></h2>
+        <p data-i18n="shop.sub">Game passes, power moves and coin packs you can grab inside the game.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter">
+        <button aria-pressed="true" data-f="all" data-i18n="sf.all">All</button>
+        <button aria-pressed="false" data-f="pass" data-i18n="sf.pass">Game Passes</button>
+        <button aria-pressed="false" data-f="power" data-i18n="sf.power">Power moves</button>
+        <button aria-pressed="false" data-f="coins" data-i18n="sf.coins">Coins</button>
+        <button aria-pressed="false" data-f="support" data-i18n="sf.support">Support</button>
+      </div>
+      <div class="shop" id="shopGrid"></div>
+      <p class="shop-note" data-i18n="shop.note">All purchases are made with Robux inside Roblox.</p>
+    </div>
+  </section>
+
+  <section id="try" style="padding-top:40px">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow" data-i18n="try.eyebrow">Try it here</span>
+        <h2 class="h" data-i18n="try.title">Can you <span class="grad">survive?</span></h2>
+        <p data-i18n="try.sub">A tiny taste of the real thing. When you have the bomb, tap another player to slap it onto them.</p>
+      </div>
+      <div class="panel arena reveal" id="arena">
+        <div class="status" id="status" aria-live="polite" data-i18n="g.ready">Press start!</div>
+        <div class="players">
+          <button class="player p1 you" data-you="YOU" aria-label="You">😬</button>
+          <button class="player p2" aria-label="Red player">😱</button>
+          <button class="player p3" aria-label="Blue player">😎</button>
+          <button class="player p4" aria-label="Green player">🤪</button>
+        </div>
+        <div class="bar"><span id="fuse"></span></div>
+        <button class="btn btn-primary" id="start" data-i18n="g.start">Start round</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:40px">
+    <div class="wrap">
+      <div class="panel beta reveal">
+        <div>
+          <span class="eyebrow" data-i18n="beta.eyebrow">Open Beta</span>
+          <h2 class="h" data-i18n="beta.title">Help us build <span class="grad">Slap or Bomb</span></h2>
+          <p class="muted" data-i18n="beta.p">The game is still in development, so you might hit bugs or unfinished features. Your honest feedback decides what we fix and add next.</p>
+          <div class="cta" style="margin-top:28px">
+            <a class="btn btn-primary js-play" href="#" target="_blank" rel="noopener" data-i18n="beta.cta">Play the beta</a>
+            <a class="btn btn-ghost js-discord" href="#" target="_blank" rel="noopener" data-i18n="beta.discord">Join the Discord</a>
+          </div>
+        </div>
+        <ul class="qs">
+          <li data-i18n="q1">😂 What was the most fun?</li>
+          <li data-i18n="q2">🤔 Was anything confusing or frustrating?</li>
+          <li data-i18n="q3">🔁 What would make you come back?</li>
+          <li data-i18n="q4">🧤 Which gloves, bomb skins or maps do you want?</li>
+          <li data-i18n="q5">🐛 Found a bug? Tell us what happened and on which device.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:60px">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="h" data-i18n="faq.title">Questions? <span class="grad">Answers.</span></h2>
+      </div>
+      <div class="faq reveal">
+        <details><summary data-i18n="f1.q">Is Slap or Bomb free?</summary><p data-i18n="f1.a">Yes. It's completely free to play on Roblox. Just open the game and hit Play.</p></details>
+        <details><summary data-i18n="f2.q">What devices can I play on?</summary><p data-i18n="f2.a">Anywhere Roblox runs: PC, Mac, phones, tablets and consoles.</p></details>
+        <details><summary data-i18n="f3.q">Can I play with my friends?</summary><p data-i18n="f3.a">Yes. Join the same server as your friends on Roblox and start slapping the bomb at each other.</p></details>
+        <details><summary data-i18n="f4.q">What does "Open Beta" mean?</summary><p data-i18n="f4.a">The game is playable now, but still being built. Expect updates, new content and the occasional bug. Your feedback shapes what comes next.</p></details>
+        <details><summary data-i18n="f5.q">How do I report a bug?</summary><p data-i18n="f5.a">Tell us what happened, what you were doing and which device you played on. A screenshot helps a lot.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap reveal">
+      <h2 class="h" data-i18n="final.title">The fuse is <span class="grad">already lit.</span></h2>
+      <p data-i18n="final.p">Jump in, grab your friends and find out who's holding the bomb when it blows.</p>
+      <div class="cta">
+        <a class="btn btn-primary js-play" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.2 1 1 17.6 17.8 23 22 6.4 5.2 1Zm9.2 13.6-4.6-1.2 1.2-4.6 4.6 1.2-1.2 4.6Z"/></svg>
+          <span data-i18n="cta.playRoblox">Play free on Roblox</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Slap or Bomb · <span data-i18n="foot.by">Made by</span> <a href="https://www.roblox.com/users/190678475/profile/" target="_blank" rel="noopener">@fred410r</a></span>
+    <span data-i18n="foot.na">Not affiliated with Roblox Corporation.</span>
+  </div>
+</footer>
+
+<script>
+// ← Indsæt dine links her
+const ROBLOX_URL  = "https://www.roblox.com/games/107846844939325/slap-or-bomb";
+const DISCORD_URL = "";
+
+document.querySelectorAll(".js-play").forEach(a => a.href = ROBLOX_URL);
+document.querySelectorAll(".js-discord").forEach(a => DISCORD_URL ? a.href = DISCORD_URL : a.remove());
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+/* ---------- Danish translations (English is in the HTML) ---------- */
+const DA = {
+  "nav.how":"Sådan virker det","nav.features":"Features","nav.try":"Prøv det",
+  "cta.play":"Spil","cta.playRoblox":"Spil gratis på Roblox","cta.how":"Sådan virker det",
+  "hero.eyebrow":"Roblox-partyspil · Open Beta",
+  "hero.lead":"Lunten er tændt, og alle løber. <strong>Slap bomben over på en anden,</strong> før den eksploderer i dine hænder. Undvig, snyd og vær den sidste, der står tilbage.",
+  "trust.free":"Gratis at spille","trust.friends":"Spil med venner","trust.devices":"PC, mobil og konsol",
+  "chip.fuse":"Lunten brænder","chip.fuseSub":"Send den videre. Nu.","chip.slap":"SLAP!","chip.slapSub":"Bomben er sendt",
+  "how.eyebrow":"Sådan virker det","how.title":"Én bombe. Én regel.<br><span class=\"grad\">Hold den ikke.</span>",
+  "how.sub":"Hver runde er kort, larmende og kaotisk. Her er præcis, hvad der sker, fra du spawner.",
+  "s1.t":"Hop ind i arenaen","s1.p":"Alle spillere spawner sammen i en blokket arena. Kom i bevægelse og find plads. Runden starter om lidt.",
+  "s2.t":"Bomben tændes","s2.p":"En tilfældig spiller får bomben, og lunten begynder at brænde. Ingen ved præcis, hvornår den springer.",
+  "s3.t":"Slap for at sende den","s3.p":"Har du bomben? Jag en anden spiller og slap dem. Bomben hopper over til dem, og nu er det dem, der går i panik.",
+  "s4.t":"BOOM. Den sidste vinder","s4.p":"Når lunten er brændt ud, er den, der holder bomben, ude. Ny bombe, ny runde, indtil kun én er tilbage.",
+  "rules.t":"Regler og pro-tips",
+  "r1":"<b>Stå aldrig stille.</b> En spiller, der står stille, er et let mål for et slap.",
+  "r2":"<b>Hold øje med lunten.</b> Jo tættere den er på nul, jo mere desperate bliver alle.",
+  "r3":"<b>Brug banen.</b> Vægge, ramper og hjørner kan redde dig eller fange dig.",
+  "r4":"<b>Slap hurtigt, løb hurtigere.</b> Når du har sendt bomben, så kom væk, før den kommer tilbage.",
+  "r5":"<b>Den sidste, der står tilbage, vinder</b> kampen. Og så gør I det hele igen.",
+  "ctrl.t":"Styring","tab.mobile":"Mobil","tab.console":"Konsol","k.move":"Bevæg dig","k.jump":"Hop","k.slap":"Slap","k.cam":"Kamera","k.click":"Venstreklik","k.rmb":"Højre musetast",
+  "k.stick":"Joystick","k.jumpBtn":"Hop-knap","k.slapBtn":"Slap-knap","k.swipe":"Swipe",
+  "feat.eyebrow":"Features","feat.title":"Bygget til <span class=\"grad\">ren kaos</span>","feat.sub":"Let at lære, umuligt at spille roligt. Tag dine venner med og find ud af, hvem der går i panik først.",
+  "t1.tag":"Multiplayer","t1.t":"Partykaos med venner","t1.p":"Hop på en server med venner eller fremmede. Hver runde bliver til en skrigende jagt, så snart lunten er tændt.",
+  "t2.t":"Handsker","t2.p":"Slap med stil. Vælg den handske, der passer til din spillestil.",
+  "t3.t":"Bombe-skins","t3.p":"Gør bomben til din egen, så alle ved, hvem de skal give skylden.",
+  "t4.t":"Danse","t4.p":"Overlevede du eksplosionen? Fejr det foran alle dem, der ikke gjorde.",
+  "t5.t":"Baner og modes","t5.p":"Farverige, blokkede arenaer fyldt med ramper, vægge og gemmesteder. Flere er på vej.",
+  "try.eyebrow":"Prøv det her","try.title":"Kan du <span class=\"grad\">overleve?</span>","try.sub":"En lille smagsprøve på det rigtige spil. Når du har bomben, så tryk på en anden spiller for at slappe den over på dem.",
+  "g.ready":"Tryk start!","g.start":"Start runde","g.again":"Spil igen","g.you":"DIG","g.have":"Du har den! SEND DEN!","g.tick":"Tik tak…","g.passed":"Sendt! 😅",
+  "g.next":"💥 BOOM! Næste runde…","g.win":"🏆 Du overlevede! Du vandt!","g.lose":"💥 BOOM! Du er ude efter {n} slaps.",
+  "beta.eyebrow":"Open Beta","beta.title":"Hjælp os med at bygge <span class=\"grad\">Slap or Bomb</span>",
+  "beta.p":"Spillet er stadig under udvikling, så du kan møde bugs eller ufærdige features. Din ærlige feedback bestemmer, hvad vi fikser og tilføjer næste gang.",
+  "beta.cta":"Spil betaen","beta.discord":"Join Discorden",
+  "q1":"😂 Hvad var det sjoveste?","q2":"🤔 Var noget forvirrende eller irriterende?","q3":"🔁 Hvad ville få dig til at komme tilbage?","q4":"🧤 Hvilke handsker, bombe-skins eller baner vil du have?","q5":"🐛 Fundet en bug? Fortæl hvad der skete, og på hvilken enhed.",
+  "faq.title":"Spørgsmål? <span class=\"grad\">Svar.</span>",
+  "f1.q":"Er Slap or Bomb gratis?","f1.a":"Ja. Det er helt gratis at spille på Roblox. Åbn bare spillet og tryk Play.",
+  "f2.q":"Hvilke enheder kan jeg spille på?","f2.a":"Alle steder, hvor Roblox kører: PC, Mac, telefoner, tablets og konsoller.",
+  "f3.q":"Kan jeg spille med mine venner?","f3.a":"Ja. Join den samme server som dine venner på Roblox, og begynd at slappe bomben over på hinanden.",
+  "f4.q":"Hvad betyder \"Open Beta\"?","f4.a":"Spillet kan spilles nu, men det bliver stadig bygget. Forvent opdateringer, nyt indhold og en enkelt bug i ny og næ. Din feedback former, hvad der kommer.",
+  "f5.q":"Hvordan melder jeg en bug?","f5.a":"Fortæl hvad der skete, hvad du lavede, og hvilken enhed du spillede på. Et screenshot hjælper meget.",
+  "final.title":"Lunten er <span class=\"grad\">allerede tændt.</span>","final.p":"Hop ind, tag dine venner med og find ud af, hvem der holder bomben, når den springer.",
+  "foot.by":"Lavet af","nav.shop":"Shop","nav.maps":"Baner","maps.eyebrow":"Baner","maps.title":"Vælg din <span class=\"grad\">slagmark</span>","maps.sub":"Hver bane spilles forskelligt. Lær hjørnerne, genvejene og gemmestederne at kende.","boss.new":"Ny opdatering","boss.t":"Boss Event","boss.p":"En helt ny boss-arena. Gå sammen med alle på serveren og nedlæg den kæmpe Bomb Boss, før den sprænger jer alle i luften.","boss.cta":"Spil Boss Event","m1.t":"Den mørke borg","m1.p":"Uhyggelige tårne og lysende fakler.","m2.t":"Togstationen","m2.p":"Undvig mellem perroner og skinner.","m3.t":"Havnen","m3.p":"En flydende arena midt i havnen.","m4.t":"Forlystelsesparken","m4.p":"Forlystelser, raketter og masser af løb.","m5.t":"Skovarenaen","m5.p":"Træer og broer at gemme sig bag.","m6.t":"Himmeløen","m6.p":"Højt over skyerne. Fald ikke ned.","shop.eyebrow":"Game Passes og shop","shop.title":"Boost dit <span class=\"grad\">kaos</span>","shop.sub":"Game passes, power moves og møntpakker, som du kan købe inde i spillet.","sf.all":"Alle","sf.pass":"Game Passes","sf.power":"Power moves","sf.coins":"Mønter","sf.support":"Støt","shop.note":"Alle køb foregår med Robux inde i Roblox.","shop.ingame":"Se pris i spillet","shop.get":"Køb","foot.na":"Ikke tilknyttet Roblox Corporation."
+};
+const EN_GAME = {"shop.ingame":"See price in game","shop.get":"Get it","g.ready":"Press start!","g.start":"Start round","g.again":"Play again","g.you":"YOU","g.have":"You have it! SLAP SOMEONE!","g.tick":"Tick tick…","g.passed":"Slapped! 😅","g.next":"💥 BOOM! Next round…","g.win":"🏆 You survived! Winner!","g.lose":"💥 BOOM! You're out after {n} slaps."};
+const EN = {};
+document.querySelectorAll("[data-i18n]").forEach(el => EN[el.dataset.i18n] = el.innerHTML);
+Object.assign(EN, EN_GAME);
+let lang = "en", shopReady = false;
+const t = k => (lang === "da" ? DA : EN)[k] ?? EN[k] ?? k;
+function setLang(l){
+  lang = l; document.documentElement.lang = l;
+  document.querySelectorAll("[data-i18n]").forEach(el => { const v = t(el.dataset.i18n); if (v) el.innerHTML = v; });
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
+  document.querySelector(".player.you").dataset.you = t("g.you");
+  try { localStorage.setItem("sob-lang", l); } catch (e) {}
+  if (shopReady) renderShop();
+}
+document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+
+
+/* ---------- Shop: edit items and prices here (price in Robux, null = not shown) ---------- */
+const SHOP = [
+  { id:"chaos-pass", kind:"pass", price:null, hot:true,
+    en:["Chaos Pass · Season 1","The season pass. Unlock exclusive gloves, bomb skins and rewards all season long."],
+    da:["Chaos Pass · Sæson 1","Sæsonpasset. Lås op for eksklusive handsker, bombe-skins og belønninger hele sæsonen."] },
+  { id:"vip", kind:"pass", price:null, en:["VIP","VIP status, exclusive perks and bonus rewards every match."], da:["VIP","VIP-status, eksklusive fordele og bonusbelønninger i hver kamp."] },
+  { id:"starter-pack", kind:"pass", price:null, en:["Starter Pack","The perfect start: a bundle of coins and goodies for new players."], da:["Starter Pack","Den perfekte start: en pakke med mønter og lækre ting til nye spillere."] },
+  { id:"pets", kind:"pass", price:null, en:["Pets","Cute pets that follow you around the arena."], da:["Pets","Søde kæledyr, der følger dig rundt i arenaen."] },
+  { id:"monthly", kind:"pass", price:null, en:["Monthly Updates","Fresh rewards and new content for you every month."], da:["Månedlige opdateringer","Nye belønninger og nyt indhold til dig hver måned."] },
+  { id:"superpower", kind:"pass", price:null, en:["Super Power","Unleash a special power and turn the round around."], da:["Superkraft","Slip en særlig kraft løs og vend runden på hovedet."] },
+  { id:"sword", kind:"pass", price:null, en:["Energy Sword","A glowing weapon to rule the arena."], da:["Energisværd","Et lysende våben til at styre arenaen."] },
+  { id:"bunker", kind:"pass", price:null, en:["Bunker","A nuke-proof hideout. Survive even the biggest blast."], da:["Bunker","Et atomsikkert skjul. Overlev selv den største eksplosion."] },
+  { id:"lucky-wheel", kind:"pass", price:null, en:["Lucky Wheel","Spin the wheel for coins, items and rare rewards."], da:["Lykkehjul","Drej hjulet og vind mønter, ting og sjældne belønninger."] },
+  { id:"nuke-all", kind:"power", price:null, en:["Nuke All","Launch a nuke and blow up the whole server."], da:["Nuke All","Send en atombombe afsted og spræng hele serveren."] },
+  { id:"kill-all", kind:"power", price:null, en:["Kill All","One giant blast. Everyone else is out."], da:["Kill All","Én kæmpe eksplosion. Alle andre er ude."] },
+  { id:"steal-money", kind:"power", price:null, en:["Steal Money","Snatch coins straight from other players."], da:["Stjæl penge","Snup mønter direkte fra de andre spillere."] },
+  { id:"coins-1000", kind:"coins", price:null, en:["1,000 Coins","A handful of coins to spend in the shop."], da:["1.000 mønter","En håndfuld mønter til shoppen."] },
+  { id:"coins-5000", kind:"coins", price:null, en:["5,000 Coins","A big stack of coins for gloves, skins and more."], da:["5.000 mønter","En stor bunke mønter til handsker, skins og mere."] },
+  { id:"coins-10000", kind:"coins", price:null, en:["10,000 Coins","The mega pile. Buy whatever you want."], da:["10.000 mønter","Mega-bunken. Køb lige hvad du vil."] },
+  { id:"donate", kind:"support", price:null, en:["Donate","Support the developer and help us build more Slap or Bomb."], da:["Donér","Støt udvikleren og hjælp os med at bygge mere Slap or Bomb."] },
+];
+const KIND = { en:{pass:"Game Pass",power:"Power move",coins:"Coins",support:"Support"}, da:{pass:"Game Pass",power:"Power move",coins:"Mønter",support:"Støt"} };
+const ROBUX = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1.5 21.1 6.75v10.5L12 22.5 2.9 17.25V6.75L12 1.5Zm0 4.2-5.5 3.15v6.3L12 18.3l5.5-3.15v-6.3L12 5.7Zm-2.6 4.75h5.2v3.1H9.4v-3.1Z"/></svg>';
+let shopFilter = "all"; shopReady = true;
+function renderShop(){
+  const g = document.getElementById("shopGrid"); if (!g) return;
+  const L = lang === "da" ? "da" : "en";
+  g.innerHTML = SHOP.filter(i => shopFilter === "all" || i.kind === shopFilter).map(i => {
+    const [name, desc] = i[L], hot = i.hot && shopFilter === "all";
+    const img = hot ? `assets/shop/${i.id}-lg.webp` : `assets/shop/${i.id}.webp`;
+    const price = i.price ? `<span class="price">${ROBUX}${i.price}</span>` : `<span class="price tbd">${t("shop.ingame")}</span>`;
+    return `<article class="panel item${hot ? " hot" : ""}">
+      <div class="pic"><img src="${img}" alt="${name}" width="${hot ? 640 : 320}" height="${hot ? 640 : 320}" loading="lazy" decoding="async"><span class="kind">${KIND[L][i.kind]}</span></div>
+      <h3>${name}</h3><p>${desc}</p>
+      <div class="buy">${price}<a class="btn btn-primary btn-sm" href="${ROBLOX_URL}#!/store" target="_blank" rel="noopener">${t("shop.get")}</a></div>
+    </article>`;
+  }).join("");
+}
+document.querySelectorAll("[data-f]").forEach(b => b.addEventListener("click", () => {
+  shopFilter = b.dataset.f;
+  document.querySelectorAll("[data-f]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  renderShop();
+}));
+
+let saved = null; try { saved = localStorage.getItem("sob-lang"); } catch (e) {}
+setLang(saved || ((navigator.language || "").toLowerCase().startsWith("da") ? "da" : "en"));
+
+/* ---------- Nav background on scroll ---------- */
+const nav = document.getElementById("nav");
+const onScroll = () => nav.classList.toggle("solid", scrollY > 30);
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+/* ---------- Reveal on scroll ---------- */
+const io = "IntersectionObserver" in window && new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}), { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+document.querySelectorAll(".reveal").forEach(el => io ? io.observe(el) : el.classList.add("in"));
+
+/* ---------- Control tabs ---------- */
+document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("[data-tab]").forEach(x => x.setAttribute("aria-selected", x === b));
+  document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== b.dataset.tab);
+}));
+
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- 3D tilt on hero art ---------- */
+const card = document.getElementById("card3d");
+if (!reduced && matchMedia("(pointer: fine)").matches) {
+  const stage = card.parentElement;
+  stage.addEventListener("pointermove", e => {
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    card.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
+  });
+  stage.addEventListener("pointerleave", () => card.style.transform = "");
+}
+
+/* ---------- Ember sparks (paused when hero is off-screen) ---------- */
+(() => {
+  if (reduced) return;
+  const c = document.getElementById("sparks"), ctx = c.getContext("2d");
+  let w, h, dpr, ps = [], run = true, raf;
+  const size = () => { dpr = Math.min(devicePixelRatio || 1, 2); w = c.offsetWidth; h = c.offsetHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  const spawn = (init) => ({ x: Math.random() * w, y: init ? Math.random() * h : h + 10, r: Math.random() * 2.2 + .6, vy: Math.random() * .7 + .3, vx: (Math.random() - .5) * .4, a: Math.random() * .6 + .3, hue: 20 + Math.random() * 30 });
+  size(); addEventListener("resize", size);
+  const N = w < 700 ? 34 : 70; for (let i = 0; i < N; i++) ps.push(spawn(true));
+  const draw = () => {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of ps) {
+      p.y -= p.vy; p.x += p.vx + Math.sin(p.y / 40) * .2;
+      if (p.y < -10) Object.assign(p, spawn(false));
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+      ctx.fillStyle = `hsla(${p.hue},100%,60%,${p.a * Math.min(1, p.y / h + .2)})`; ctx.fill();
+    }
+    if (run) raf = requestAnimationFrame(draw);
+  };
+  new IntersectionObserver(([e]) => { run = e.isIntersecting; if (run) { cancelAnimationFrame(raf); draw(); } }).observe(c);
+})();
+
+/* ---------- Mini game ---------- */
+(() => {
+  const players = [...document.querySelectorAll(".player")];
+  const fuse = document.getElementById("fuse"), status = document.getElementById("status");
+  const arena = document.getElementById("arena"), start = document.getElementById("start");
+  const faces = players.map(p => p.textContent);
+  let holder = -1, alive = [], timer = 0, t0 = 0, len = 0, raf = 0, slaps = 0;
+  const say = k => { status.dataset.i18n = k; status.innerHTML = t(k); };
+  const give = i => { players.forEach(p => p.classList.remove("has")); holder = i; players[i].classList.add("has"); say(i === 0 ? "g.have" : "g.tick"); };
+  const tick = now => {
+    const left = Math.max(0, 1 - (now - t0) / len);
+    fuse.style.transform = `scaleX(${left})`;
+    if (left > 0) raf = requestAnimationFrame(tick); else boom();
+  };
+  const round = () => {
+    give(alive[Math.random() * alive.length | 0]);
+    len = 3000 + Math.random() * 3500; t0 = performance.now();
+    cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
+    clearInterval(timer);
+    timer = setInterval(() => {   // bots slap it onward
+      if (holder > 0 && Math.random() < .5) { const o = alive.filter(i => i !== holder); give(o[Math.random() * o.length | 0]); }
+    }, 650);
+  };
+  const end = () => { start.disabled = false; start.dataset.i18n = "g.again"; start.textContent = t("g.again"); };
+  const boom = () => {
+    clearInterval(timer);
+    arena.classList.remove("boom"); void arena.offsetWidth; arena.classList.add("boom");
+    const out = holder; players[out].classList.remove("has"); players[out].classList.add("out"); players[out].textContent = "💀";
+    alive = alive.filter(i => i !== out); holder = -1;
+    if (out === 0) { status.removeAttribute("data-i18n"); status.textContent = t("g.lose").replace("{n}", slaps); return end(); }
+    if (alive.length === 1) { say("g.win"); return end(); }
+    say("g.next"); setTimeout(round, 1100);
+  };
+  players.forEach((p, i) => p.addEventListener("click", () => {
+    if (holder !== 0 || i === 0 || !alive.includes(i)) return;
+    slaps++; give(i); say("g.passed");
+  }));
+  start.addEventListener("click", () => {
+    players.forEach((p, i) => { p.classList.remove("out", "has"); p.textContent = faces[i]; });
+    alive = [0, 1, 2, 3]; holder = -1; slaps = 0; start.disabled = true;
+    round();
+  });
+})();
+</script>
+</body>
+</html>
