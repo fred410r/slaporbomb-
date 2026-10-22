@@ -163,6 +163,8 @@ section{padding:120px 0;position:relative}
 .keys{display:grid;gap:12px}
 .keys div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:14px}
 .keys span{color:var(--muted)}
+.keys.soon p{padding:22px;border-radius:14px;background:rgba(255,197,49,.06);border:1px dashed rgba(255,197,49,.35);color:var(--muted);line-height:1.7}
+.keys.soon b{color:var(--text);font-size:16px}
 kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9px;border-radius:7px;background:linear-gradient(#232a52,#161b3a);border:1px solid rgba(255,255,255,.14);border-bottom-width:3px;white-space:nowrap}
 @media (max-width:900px){.split{grid-template-columns:1fr}.rules,.controls{padding:26px}}
 
@@ -331,7 +333,7 @@ footer a:hover{color:var(--text)}
       <div class="trust">
         <span><i>🆓</i><span data-i18n="trust.free">Free to play</span></span>
         <span><i>👥</i><span data-i18n="trust.friends">Play with friends</span></span>
-        <span><i>📱</i><span data-i18n="trust.devices">PC, mobile & console</span></span>
+        <span><i>💻</i><span data-i18n="trust.devices">PC only · mobile coming soon</span></span>
       </div>
     </div>
     <div class="stage">
@@ -392,8 +394,7 @@ footer a:hover{color:var(--text)}
           <h3 data-i18n="ctrl.t">Controls</h3>
           <div class="tabs" role="tablist">
             <button role="tab" aria-selected="true" data-tab="pc">PC</button>
-            <button role="tab" aria-selected="false" data-tab="mobile" data-i18n="tab.mobile">Mobile</button>
-            <button role="tab" aria-selected="false" data-tab="console" data-i18n="tab.console">Console</button>
+            <button role="tab" aria-selected="false" data-tab="mobile" data-i18n="tab.mobile">Mobile (soon)</button>
           </div>
           <div class="keys" data-panel="pc">
             <div><span data-i18n="k.move">Move</span><kbd>W A S D</kbd></div>
@@ -401,17 +402,8 @@ footer a:hover{color:var(--text)}
             <div><span data-i18n="k.slap">Slap</span><kbd data-i18n="k.click">Left click</kbd></div>
             <div><span data-i18n="k.cam">Camera</span><kbd data-i18n="k.rmb">Right mouse</kbd></div>
           </div>
-          <div class="keys" data-panel="mobile" hidden>
-            <div><span data-i18n="k.move">Move</span><kbd data-i18n="k.stick">Joystick</kbd></div>
-            <div><span data-i18n="k.jump">Jump</span><kbd data-i18n="k.jumpBtn">Jump button</kbd></div>
-            <div><span data-i18n="k.slap">Slap</span><kbd data-i18n="k.slapBtn">Slap button</kbd></div>
-            <div><span data-i18n="k.cam">Camera</span><kbd data-i18n="k.swipe">Swipe</kbd></div>
-          </div>
-          <div class="keys" data-panel="console" hidden>
-            <div><span data-i18n="k.move">Move</span><kbd>Left stick</kbd></div>
-            <div><span data-i18n="k.jump">Jump</span><kbd>A / ✕</kbd></div>
-            <div><span data-i18n="k.slap">Slap</span><kbd>RT / R2</kbd></div>
-            <div><span data-i18n="k.cam">Camera</span><kbd>Right stick</kbd></div>
+          <div class="keys soon" data-panel="mobile" hidden>
+            <p><b data-i18n="soon.t">📱 Mobile is coming!</b><br><span data-i18n="soon.p">Slap or Bomb is PC only right now. We are working on mobile support and it will arrive in a future update.</span></p>
           </div>
         </div>
       </div>
@@ -541,7 +533,7 @@ footer a:hover{color:var(--text)}
       </div>
       <div class="faq reveal">
         <details><summary data-i18n="f1.q">Is Slap or Bomb free?</summary><p data-i18n="f1.a">Yes. It's completely free to play on Roblox. Just open the game and hit Play.</p></details>
-        <details><summary data-i18n="f2.q">What devices can I play on?</summary><p data-i18n="f2.a">Anywhere Roblox runs: PC, Mac, phones, tablets and consoles.</p></details>
+        <details><summary data-i18n="f2.q">What devices can I play on?</summary><p data-i18n="f2.a">Right now Slap or Bomb is PC only (Windows and Mac). We are working on mobile, and it will come in a future update.</p></details>
         <details><summary data-i18n="f3.q">Can I play with my friends?</summary><p data-i18n="f3.a">Yes. Join the same server as your friends on Roblox and start slapping the bomb at each other.</p></details>
         <details><summary data-i18n="f4.q">What does "Open Beta" mean?</summary><p data-i18n="f4.a">The game is playable now, but still being built. Expect updates, new content and the occasional bug. Your feedback shapes what comes next.</p></details>
         <details><summary data-i18n="f5.q">How do I report a bug?</summary><p data-i18n="f5.a">Tell us what happened, what you were doing and which device you played on. A screenshot helps a lot.</p></details>
@@ -585,7 +577,7 @@ const DA = {
   "cta.play":"Spil","cta.playRoblox":"Spil gratis på Roblox","cta.how":"Sådan virker det",
   "hero.eyebrow":"Roblox-partyspil · Open Beta",
   "hero.lead":"Lunten er tændt, og alle løber. <strong>Slap bomben over på en anden,</strong> før den eksploderer i dine hænder. Undvig, snyd og vær den sidste, der står tilbage.",
-  "trust.free":"Gratis at spille","trust.friends":"Spil med venner","trust.devices":"PC, mobil og konsol",
+  "trust.free":"Gratis at spille","trust.friends":"Spil med venner","trust.devices":"Kun PC · mobil kommer snart",
   "chip.fuse":"Lunten brænder","chip.fuseSub":"Send den videre. Nu.","chip.slap":"SLAP!","chip.slapSub":"Bomben er sendt",
   "how.eyebrow":"Sådan virker det","how.title":"Én bombe. Én regel.<br><span class=\"grad\">Hold den ikke.</span>",
   "how.sub":"Hver runde er kort, larmende og kaotisk. Her er præcis, hvad der sker, fra du spawner.",
@@ -599,7 +591,7 @@ const DA = {
   "r3":"<b>Brug banen.</b> Vægge, ramper og hjørner kan redde dig eller fange dig.",
   "r4":"<b>Slap hurtigt, løb hurtigere.</b> Når du har sendt bomben, så kom væk, før den kommer tilbage.",
   "r5":"<b>Den sidste, der står tilbage, vinder</b> kampen. Og så gør I det hele igen.",
-  "ctrl.t":"Styring","tab.mobile":"Mobil","tab.console":"Konsol","k.move":"Bevæg dig","k.jump":"Hop","k.slap":"Slap","k.cam":"Kamera","k.click":"Venstreklik","k.rmb":"Højre musetast",
+  "ctrl.t":"Styring","tab.mobile":"Mobil (snart)","soon.t":"📱 Mobil er på vej!","soon.p":"Slap or Bomb er kun til PC lige nu. Vi arbejder på mobil, og det kommer i en fremtidig opdatering.","k.move":"Bevæg dig","k.jump":"Hop","k.slap":"Slap","k.cam":"Kamera","k.click":"Venstreklik","k.rmb":"Højre musetast",
   "k.stick":"Joystick","k.jumpBtn":"Hop-knap","k.slapBtn":"Slap-knap","k.swipe":"Swipe",
   "feat.eyebrow":"Features","feat.title":"Bygget til <span class=\"grad\">ren kaos</span>","feat.sub":"Let at lære, umuligt at spille roligt. Tag dine venner med og find ud af, hvem der går i panik først.",
   "t1.tag":"Multiplayer","t1.t":"Partykaos med venner","t1.p":"Hop på en server med venner eller fremmede. Hver runde bliver til en skrigende jagt, så snart lunten er tændt.",
@@ -616,7 +608,7 @@ const DA = {
   "q1":"😂 Hvad var det sjoveste?","q2":"🤔 Var noget forvirrende eller irriterende?","q3":"🔁 Hvad ville få dig til at komme tilbage?","q4":"🧤 Hvilke handsker, bombe-skins eller baner vil du have?","q5":"🐛 Fundet en bug? Fortæl hvad der skete, og på hvilken enhed.",
   "faq.title":"Spørgsmål? <span class=\"grad\">Svar.</span>",
   "f1.q":"Er Slap or Bomb gratis?","f1.a":"Ja. Det er helt gratis at spille på Roblox. Åbn bare spillet og tryk Play.",
-  "f2.q":"Hvilke enheder kan jeg spille på?","f2.a":"Alle steder, hvor Roblox kører: PC, Mac, telefoner, tablets og konsoller.",
+  "f2.q":"Hvilke enheder kan jeg spille på?","f2.a":"Lige nu er Slap or Bomb kun til PC (Windows og Mac). Vi arbejder på mobil, og det kommer i en fremtidig opdatering.",
   "f3.q":"Kan jeg spille med mine venner?","f3.a":"Ja. Join den samme server som dine venner på Roblox, og begynd at slappe bomben over på hinanden.",
   "f4.q":"Hvad betyder \"Open Beta\"?","f4.a":"Spillet kan spilles nu, men det bliver stadig bygget. Forvent opdateringer, nyt indhold og en enkelt bug i ny og næ. Din feedback former, hvad der kommer.",
   "f5.q":"Hvordan melder jeg en bug?","f5.a":"Fortæl hvad der skete, hvad du lavede, og hvilken enhed du spillede på. Et screenshot hjælper meget.",
