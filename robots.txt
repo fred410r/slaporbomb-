@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://fred410r.github.io/slaporbomb-/sitemap.xml
