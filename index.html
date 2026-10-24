@@ -343,6 +343,27 @@ main{counter-reset:sec}
 .feed .live-dot{flex:none}
 @keyframes feedIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
 @keyframes feedOut{to{opacity:0;transform:translateX(-24px)}}
+/* ---------- Narrator (browser speech, free) ---------- */
+.narr{position:fixed;right:18px;bottom:18px;z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:10px;max-width:min(420px,calc(100vw - 36px))}
+.narr-cap{position:relative;padding:16px 18px 14px;border-radius:18px;background:rgba(20,20,24,.94);border:1px solid rgba(233,196,106,.35);box-shadow:0 24px 50px -20px rgba(0,0,0,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:15px;line-height:1.55;color:var(--muted)}
+.narr-cap .who{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.narr-cap .txt span{transition:color .25s}
+.narr-cap .txt span.said{color:var(--text)}
+.narr-cap .txt span.now{color:var(--gold)}
+.narr-cap .x{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
+.narr-cap .x:hover{color:var(--text);background:var(--panel-2)}
+.narr-btn{display:flex;align-items:center;gap:12px;min-height:52px;padding:8px 20px 8px 8px;border-radius:999px;background:rgba(20,20,24,.94);border:1px solid rgba(233,196,106,.45);box-shadow:0 18px 40px -16px rgba(0,0,0,.85),0 0 0 0 rgba(233,196,106,.5);font-weight:600;font-size:14px;color:var(--text);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.narr-btn.invite{animation:narrPulse 2.2s infinite}
+@keyframes narrPulse{0%{box-shadow:0 18px 40px -16px rgba(0,0,0,.85),0 0 0 0 rgba(233,196,106,.45)}70%{box-shadow:0 18px 40px -16px rgba(0,0,0,.85),0 0 0 16px rgba(233,196,106,0)}100%{box-shadow:0 18px 40px -16px rgba(0,0,0,.85),0 0 0 0 rgba(233,196,106,0)}}
+.narr-av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#14110a;flex:none}
+.narr-av .ic{width:20px;height:20px}
+.narr-wave{display:flex;align-items:center;gap:3px;height:18px}
+.narr-wave i{width:3px;height:30%;border-radius:2px;background:var(--gold);opacity:.5}
+.narr.talking .narr-wave i{opacity:1;animation:wave .9s ease-in-out infinite}
+.narr.talking .narr-wave i:nth-child(2){animation-delay:.15s}.narr.talking .narr-wave i:nth-child(3){animation-delay:.3s}.narr.talking .narr-wave i:nth-child(4){animation-delay:.45s}
+@keyframes wave{0%,100%{height:25%}50%{height:100%}}
+@media (max-width:600px){.narr{left:12px;right:12px;bottom:12px;max-width:none}.feed{bottom:82px}}
+@media (prefers-reduced-motion:reduce){.narr-btn.invite,.narr.talking .narr-wave i{animation:none}}
 .toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;opacity:0;z-index:99;padding:14px 20px;border-radius:14px;background:#18181d;border:1px solid rgba(233,196,106,.4);font-weight:600;box-shadow:0 20px 40px -10px rgba(0,0,0,.7);transition:all .3s var(--ease);pointer-events:none}
 .toast.show{opacity:1;translate:-50% 0}
 /* Feedback */
@@ -645,7 +666,7 @@ footer a:hover{color:var(--text)}
     </div>
   </section>
 
-  <section style="padding-top:40px">
+  <section id="beta" style="padding-top:40px">
     <div class="wrap">
       <div class="panel beta reveal">
         <div>
@@ -769,6 +790,10 @@ footer a:hover{color:var(--text)}
   </div>
 </footer>
 
+<div class="narr" id="narr">
+  <div class="narr-cap" id="narrCap" hidden><button class="x" id="narrX" type="button" aria-label="Close"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div class="who"><i class="live-dot"></i><span data-i18n="narr.who">Live guide</span></div><div class="txt" id="narrTxt" aria-live="polite"></div></div>
+  <button class="narr-btn invite" id="narrBtn" type="button" aria-pressed="false"><span class="narr-av"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="14" r="7.5"/><path d="m15.5 8.5 2.5-2.5M19 2v2M22 5h-2M21 3l-1 1"/></svg></span><span class="narr-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="narrLbl" data-i18n="narr.start">Start the guided tour</span></button>
+</div>
 <script src="assets/vendor/motion-11.11.17.min.js"></script>
 <script>
 // ← Indsæt dine links her
@@ -1278,6 +1303,110 @@ document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", 
 
   // Mini game: bomb explosion shake with Motion
   document.addEventListener("sob:boom", () => animate("#arena", { scale: [1, 1.04, .98, 1], rotate: [0, -1.5, 1.5, 0] }, { duration: .45, ease }));
+})();
+/* ---------- Live guide: the site talks you through the game (Web Speech API, free, built into the browser) ---------- */
+(() => {
+  const LINES = {
+    en: {
+      top: "Welcome to Slap or Bomb. One bomb. One rule. Don't be holding it when it blows. Scroll down, and I'll show you around.",
+      live: "These numbers are live, straight from Roblox and Discord. Every player you see here is a real person, probably about to get slapped.",
+      how: "Here's how a round works. You drop into the arena, the fuse gets lit, and if the bomb lands in your hands, you slap it onto someone else. Fast.",
+      features: "Gloves, bomb skins, dances and crazy maps. Everything here is built for pure chaos with your friends.",
+      maps: "Pick your battlefield. And the brand new Boss Event? The whole server teams up against one giant Bomb Boss.",
+      shop: "Want to stand out? Game passes, power moves and coin packs. You can grab all of them inside the game.",
+      try: "Try it right here. Press start, and when you get the bomb, click another player to slap it away. Don't panic.",
+      beta: "Slap or Bomb is in Open Beta. That means you can help shape the game, and new stuff drops all the time.",
+      feedback: "The developer reads every single message. Give the game a rating, report a bug, or share your wildest idea.",
+      faq: "Got questions? The answers are right here.",
+      final: "The fuse is already lit. Hit play, it's free on Roblox. See you in the arena."
+    },
+    da: {
+      top: "Velkommen til Slap or Bomb. Én bombe. Én regel. Hold den ikke, når den springer. Scroll ned, så viser jeg dig rundt.",
+      live: "De her tal er live, direkte fra Roblox og Discord. Hver spiller her er en rigtig person, som nok er ved at få et slap.",
+      how: "Sådan foregår en runde. Du lander i arenaen, lunten bliver tændt, og hvis bomben havner hos dig, så slapper du den videre til en anden. Hurtigt.",
+      features: "Handsker, bombe-skins, danse og vilde baner. Alt her er bygget til ren kaos med dine venner.",
+      maps: "Vælg din slagmark. Og det helt nye Boss Event? Hele serveren går sammen mod én kæmpe Bomb Boss.",
+      shop: "Vil du skille dig ud? Game passes, power moves og møntpakker. Du kan købe dem alle sammen inde i spillet.",
+      try: "Prøv det lige her. Tryk start, og når du får bomben, så klik på en anden spiller for at slappe den videre. Gå ikke i panik.",
+      beta: "Slap or Bomb er i Open Beta. Det betyder, at du kan være med til at forme spillet, og der kommer nye ting hele tiden.",
+      feedback: "Udvikleren læser hver eneste besked. Giv spillet en rating, meld en fejl, eller del din vildeste idé.",
+      faq: "Har du spørgsmål? Svarene står lige her.",
+      final: "Lunten er allerede tændt. Tryk play, det er gratis på Roblox. Vi ses i arenaen."
+    }
+  };
+  Object.assign(EN, { "narr.start": "Start the guided tour", "narr.on": "Guide is talking · tap to mute", "narr.off": "Guide muted · tap to listen", "narr.who": "Live guide" });
+  Object.assign(DA, { "narr.start": "Start rundvisningen", "narr.on": "Guiden taler · tryk for lydløs", "narr.off": "Guiden er på lydløs · tryk for at lytte", "narr.who": "Live guide" });
+  if (lang === "da") setLang("da");
+
+  const box = document.getElementById("narr"), btn = document.getElementById("narrBtn"), lbl = document.getElementById("narrLbl");
+  const cap = document.getElementById("narrCap"), txt = document.getElementById("narrTxt");
+  const synth = "speechSynthesis" in window ? window.speechSynthesis : null;
+  let on = false, started = false, current = "top", typeTimer = null, hideT = null;
+  const said = new Set();
+
+  const pickVoice = () => {
+    if (!synth) return null;
+    const want = lang === "da" ? "da" : "en", vs = synth.getVoices().filter(v => v.lang.toLowerCase().startsWith(want));
+    const score = v => (/natural|neural|online/i.test(v.name) ? 4 : 0) + (/google/i.test(v.name) ? 2 : 0) + (/en-us|en-gb|da-dk/i.test(v.lang) ? 1 : 0);
+    return vs.sort((a, b) => score(b) - score(a))[0] || null;
+  };
+  if (synth) synth.onvoiceschanged = () => {};
+
+  const render = text => {
+    txt.innerHTML = ""; const words = text.split(" ");
+    words.forEach((w, i) => { const sp = document.createElement("span"); sp.textContent = w + (i < words.length - 1 ? " " : ""); txt.appendChild(sp); });
+    return [...txt.children];
+  };
+  const typeAlong = spans => { // fallback highlight when the browser gives no word timing
+    clearInterval(typeTimer); let i = 0;
+    typeTimer = setInterval(() => { if (i > 0) spans[i - 1].className = "said"; if (i >= spans.length) return clearInterval(typeTimer); spans[i++].className = "now"; }, 260);
+  };
+
+  const say = id => {
+    const text = (LINES[lang] || LINES.en)[id]; if (!text) return;
+    current = id; said.add(id);
+    clearTimeout(hideT); cap.hidden = false; const spans = render(text);
+    if (window.Motion && !reduced) Motion.animate(cap, { opacity: [0, 1], y: [14, 0] }, { duration: .35 });
+    if (!synth || !on) { typeAlong(spans); return; }
+    synth.cancel(); clearInterval(typeTimer);
+    const u = new SpeechSynthesisUtterance(text), v = pickVoice();
+    if (v) u.voice = v; u.lang = v ? v.lang : (lang === "da" ? "da-DK" : "en-US"); u.rate = 1.03; u.pitch = 1;
+    let gotBoundary = false;
+    u.onstart = () => { box.classList.add("talking"); setTimeout(() => { if (!gotBoundary) typeAlong(spans); }, 700); };
+    u.onboundary = e => {
+      if (e.name && e.name !== "word") return; gotBoundary = true; clearInterval(typeTimer);
+      let pos = 0; spans.forEach(sp => { const end = pos + sp.textContent.length; sp.className = e.charIndex >= end ? "said" : e.charIndex >= pos ? "now" : ""; pos = end; });
+    };
+    u.onend = u.onerror = () => { box.classList.remove("talking"); spans.forEach(sp => sp.className = "said"); clearTimeout(hideT); hideT = setTimeout(() => { if (!box.classList.contains("talking")) cap.hidden = true; }, 5000); };
+    synth.speak(u);
+  };
+
+  const setLabel = () => { lbl.textContent = t(!started ? "narr.start" : on ? "narr.on" : "narr.off"); lbl.removeAttribute("data-i18n"); btn.setAttribute("aria-pressed", on); };
+  btn.addEventListener("click", () => {
+    btn.classList.remove("invite");
+    if (!started) { started = true; on = !!synth; setLabel(); say(current); return; }
+    on = !on; setLabel();
+    if (on) say(current); else { synth && synth.cancel(); box.classList.remove("talking"); }
+  });
+  document.getElementById("narrX").addEventListener("click", () => { cap.hidden = true; });
+  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { if (started) { setLabel(); synth && synth.cancel(); say(current); } }));
+
+  // Speak each part of the page once, when it comes into view
+  const ids = Object.keys(LINES.en);
+  const targets = ids.map(id => id === "final" ? document.querySelector(".final") : document.getElementById(id)).filter(Boolean);
+  if ("IntersectionObserver" in window) {
+    const io2 = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = e.target.id || "final";
+      if (id === "live" && e.target.hidden) return;
+      current = id;
+      if (started && !said.has(id)) say(id);
+    }), { threshold: 0, rootMargin: "-45% 0px -45% 0px" });
+    targets.forEach(el => io2.observe(el));
+  }
+  addEventListener("pagehide", () => synth && synth.cancel());
+  // Show the first line as live captions (sound needs a tap, browsers block autoplay)
+  setTimeout(() => { if (!started && scrollY < innerHeight) say("top"); }, 3200);
 })();
 </script>
 </body>
