@@ -8,9 +8,15 @@
 <meta name="theme-color" content="#070a17">
 <meta property="og:title" content="Slap or Bomb | Open Beta on Roblox">
 <meta property="og:description" content="Slap it. Pass it. Don't be holding it when it blows. Play free on Roblox.">
-<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:image" content="https://fred410r.github.io/slaporbomb-/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://fred410r.github.io/slaporbomb-/">
+<meta property="og:site_name" content="Slap or Bomb">
+<link rel="canonical" href="https://fred410r.github.io/slaporbomb-/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fred410r.github.io/slaporbomb-/assets/og-image.jpg">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" as="image" href="assets/key-art-640.webp" imagesrcset="assets/key-art-640.webp 640w, assets/key-art-1254.webp 1254w" imagesizes="(min-width: 980px) 520px, 88vw" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -261,6 +267,8 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 @media (max-width:900px){.beta{grid-template-columns:1fr;padding:32px 24px}}
 
 
+.toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;opacity:0;z-index:99;padding:14px 20px;border-radius:14px;background:#1a2250;border:1px solid rgba(255,197,49,.4);font-weight:600;box-shadow:0 20px 40px -10px rgba(0,0,0,.7);transition:all .3s var(--ease);pointer-events:none}
+.toast.show{opacity:1;translate:-50% 0}
 /* Feedback */
 .fb{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:start}
 .fb-side{padding:34px}
@@ -651,6 +659,7 @@ footer a:hover{color:var(--text)}
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.2 1 1 17.6 17.8 23 22 6.4 5.2 1Zm9.2 13.6-4.6-1.2 1.2-4.6 4.6 1.2-1.2 4.6Z"/></svg>
           <span data-i18n="cta.playRoblox">Play free on Roblox</span>
         </a>
+        <button class="btn btn-ghost js-share" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg><span data-i18n="share.btn">Share with friends</span></button>
         <a class="btn btn-ghost js-discord" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.4 18.4 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9 -.3 13.6.1 18.1a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.7ZM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg><span data-i18n="beta.discord">Join the Discord</span></a>
       </div>
     </div>
@@ -660,7 +669,7 @@ footer a:hover{color:var(--text)}
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Slap or Bomb · <span data-i18n="foot.by">Made by</span> <a href="https://www.roblox.com/users/190678475/profile/" target="_blank" rel="noopener">@fred410r</a></span>
-    <span><a class="js-discord" href="#" target="_blank" rel="noopener">Discord</a> · <span data-i18n="foot.na">Not affiliated with Roblox Corporation.</span></span>
+    <span><button class="js-share" type="button" style="font-size:inherit;color:inherit;text-decoration:underline" data-i18n="share.short">Share</button> · <a class="js-discord" href="#" target="_blank" rel="noopener">Discord</a> · <span data-i18n="foot.na">Not affiliated with Roblox Corporation.</span></span>
   </div>
 </footer>
 
@@ -721,9 +730,9 @@ const DA = {
   "f4.q":"Hvad betyder \"Open Beta\"?","f4.a":"Spillet kan spilles nu, men det bliver stadig bygget. Forvent opdateringer, nyt indhold og en enkelt bug i ny og næ. Din feedback former, hvad der kommer.",
   "f5.q":"Hvordan melder jeg en bug?","f5.a":"Fortæl hvad der skete, hvad du lavede, og hvilken enhed du spillede på. Et screenshot hjælper meget.",
   "final.title":"Lunten er <span class=\"grad\">allerede tændt.</span>","final.p":"Hop ind, tag dine venner med og find ud af, hvem der holder bomben, når den springer.",
-  "foot.by":"Lavet af","nav.fb":"Feedback","beta.fb":"Giv feedback","fb.eyebrow":"Feedback","fb.title":"Giv spillet en rating. <span class=\"grad\">Fortæl os alt.</span>","fb.sub":"Elskede du det? Fandt du en bug? Har du en vild idé? Udvikleren læser hver eneste besked.","fb.side.t":"Hvad skal jeg skrive?","fb.side.p":"Jo mere præcist, jo bedre. Kort er også fint.","fb.l1":"<b>Rating:</b> hvor sjovt er spillet lige nu?","fb.l2":"<b>Bugs:</b> hvad skete der, og hvad lavede du?","fb.l3":"<b>Idéer:</b> nye baner, handsker, bombe-skins, modes…","fb.l4":"<b>Alt andet:</b> hvad ville få dig til at spille mere?","fb.discord":"Eller skriv med os på Discord","fb.rate":"Din rating","fb.type":"Hvad handler det om?","fb.k1":"💬 Feedback","fb.k2":"🐛 Bug / problem","fb.k3":"💡 Idé","fb.k4":"✨ Andet","fb.msg":"Din besked","fb.msg.ph":"Fortæl os hvad du synes…","fb.name":"Roblox-brugernavn (valgfrit)","fb.name.ph":"Så vi kan takke dig i spillet","fb.send":"Send feedback","fb.sending":"Sender…","fb.r1":"1/5 · Ikke godt","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Godt","fb.r4":"4/5 · Rigtig godt","fb.r5":"5/5 · Elsker det! 🔥","fb.e.empty":"Giv en rating eller skriv en besked først.","fb.e.short":"Skriv lidt mere, så vi forstår dig (mindst 5 tegn).","fb.e.wait":"Vent lige et øjeblik, før du sender igen.","fb.e.fail":"Noget gik galt. Prøv igen, eller skriv på Discord.","fb.done.t":"Tak for din feedback! 🙌","fb.done.p":"Vi har modtaget din besked. Den hjælper os med at gøre Slap or Bomb bedre.","fb.again":"Send mere feedback","fb.copy":"Feedback-formularen bliver sat op lige nu. Din besked er kopieret, så du kan sætte den ind på vores Discord.","nav.shop":"Shop","nav.maps":"Baner","maps.eyebrow":"Baner","maps.title":"Vælg din <span class=\"grad\">slagmark</span>","maps.sub":"Hver bane spilles forskelligt. Lær hjørnerne, genvejene og gemmestederne at kende.","boss.new":"Ny opdatering","boss.t":"Boss Event","boss.p":"En helt ny boss-arena. Gå sammen med alle på serveren og nedlæg den kæmpe Bomb Boss, før den sprænger jer alle i luften.","boss.cta":"Spil Boss Event","m1.t":"Den mørke borg","m1.p":"Uhyggelige tårne og lysende fakler.","m2.t":"Togstationen","m2.p":"Undvig mellem perroner og skinner.","m3.t":"Havnen","m3.p":"En flydende arena midt i havnen.","m4.t":"Forlystelsesparken","m4.p":"Forlystelser, raketter og masser af løb.","m5.t":"Skovarenaen","m5.p":"Træer og broer at gemme sig bag.","m6.t":"Himmeløen","m6.p":"Højt over skyerne. Fald ikke ned.","shop.eyebrow":"Game Passes og shop","shop.title":"Boost dit <span class=\"grad\">kaos</span>","shop.sub":"Game passes, power moves og møntpakker, som du kan købe inde i spillet.","sf.all":"Alle","sf.pass":"Game Passes","sf.power":"Power moves","sf.coins":"Mønter","sf.support":"Støt","shop.note":"Alle køb foregår med Robux inde i Roblox.","shop.ingame":"Se pris i spillet","shop.get":"Køb","foot.na":"Ikke tilknyttet Roblox Corporation."
+  "foot.by":"Lavet af","share.btn":"Del med vennerne","share.short":"Del","share.text":"Tjek Slap or Bomb på Roblox! 💣","share.copied":"Link kopieret! Send det til dine venner 🎉","share.copy":"Kopiér linket:","nav.fb":"Feedback","beta.fb":"Giv feedback","fb.eyebrow":"Feedback","fb.title":"Giv spillet en rating. <span class=\"grad\">Fortæl os alt.</span>","fb.sub":"Elskede du det? Fandt du en bug? Har du en vild idé? Udvikleren læser hver eneste besked.","fb.side.t":"Hvad skal jeg skrive?","fb.side.p":"Jo mere præcist, jo bedre. Kort er også fint.","fb.l1":"<b>Rating:</b> hvor sjovt er spillet lige nu?","fb.l2":"<b>Bugs:</b> hvad skete der, og hvad lavede du?","fb.l3":"<b>Idéer:</b> nye baner, handsker, bombe-skins, modes…","fb.l4":"<b>Alt andet:</b> hvad ville få dig til at spille mere?","fb.discord":"Eller skriv med os på Discord","fb.rate":"Din rating","fb.type":"Hvad handler det om?","fb.k1":"💬 Feedback","fb.k2":"🐛 Bug / problem","fb.k3":"💡 Idé","fb.k4":"✨ Andet","fb.msg":"Din besked","fb.msg.ph":"Fortæl os hvad du synes…","fb.name":"Roblox-brugernavn (valgfrit)","fb.name.ph":"Så vi kan takke dig i spillet","fb.send":"Send feedback","fb.sending":"Sender…","fb.r1":"1/5 · Ikke godt","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Godt","fb.r4":"4/5 · Rigtig godt","fb.r5":"5/5 · Elsker det! 🔥","fb.e.empty":"Giv en rating eller skriv en besked først.","fb.e.short":"Skriv lidt mere, så vi forstår dig (mindst 5 tegn).","fb.e.wait":"Vent lige et øjeblik, før du sender igen.","fb.e.fail":"Noget gik galt. Prøv igen, eller skriv på Discord.","fb.done.t":"Tak for din feedback! 🙌","fb.done.p":"Vi har modtaget din besked. Den hjælper os med at gøre Slap or Bomb bedre.","fb.again":"Send mere feedback","fb.copy":"Feedback-formularen bliver sat op lige nu. Din besked er kopieret, så du kan sætte den ind på vores Discord.","nav.shop":"Shop","nav.maps":"Baner","maps.eyebrow":"Baner","maps.title":"Vælg din <span class=\"grad\">slagmark</span>","maps.sub":"Hver bane spilles forskelligt. Lær hjørnerne, genvejene og gemmestederne at kende.","boss.new":"Ny opdatering","boss.t":"Boss Event","boss.p":"En helt ny boss-arena. Gå sammen med alle på serveren og nedlæg den kæmpe Bomb Boss, før den sprænger jer alle i luften.","boss.cta":"Spil Boss Event","m1.t":"Den mørke borg","m1.p":"Uhyggelige tårne og lysende fakler.","m2.t":"Togstationen","m2.p":"Undvig mellem perroner og skinner.","m3.t":"Havnen","m3.p":"En flydende arena midt i havnen.","m4.t":"Forlystelsesparken","m4.p":"Forlystelser, raketter og masser af løb.","m5.t":"Skovarenaen","m5.p":"Træer og broer at gemme sig bag.","m6.t":"Himmeløen","m6.p":"Højt over skyerne. Fald ikke ned.","shop.eyebrow":"Game Passes og shop","shop.title":"Boost dit <span class=\"grad\">kaos</span>","shop.sub":"Game passes, power moves og møntpakker, som du kan købe inde i spillet.","sf.all":"Alle","sf.pass":"Game Passes","sf.power":"Power moves","sf.coins":"Mønter","sf.support":"Støt","shop.note":"Alle køb foregår med Robux inde i Roblox.","shop.ingame":"Se pris i spillet","shop.get":"Køb","foot.na":"Ikke tilknyttet Roblox Corporation."
 };
-const EN_GAME = {"fb.sending":"Sending…","fb.r1":"1/5 · Not good","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Good","fb.r4":"4/5 · Really good","fb.r5":"5/5 · Love it! 🔥","fb.e.empty":"Give a rating or write a message first.","fb.e.short":"Write a bit more so we understand you (at least 5 characters).","fb.e.wait":"Hold on a moment before sending again.","fb.e.fail":"Something went wrong. Try again, or tell us on Discord.","fb.done.t":"Thanks for your feedback! 🙌","fb.done.p":"We got your message. It helps us make Slap or Bomb better.","fb.again":"Send more feedback","fb.copy":"The feedback form is being set up right now. Your message was copied so you can paste it in our Discord.","shop.ingame":"See price in game","shop.get":"Get it","g.ready":"Press start!","g.start":"Start round","g.again":"Play again","g.you":"YOU","g.have":"You have it! SLAP SOMEONE!","g.tick":"Tick tick…","g.passed":"Slapped! 😅","g.next":"💥 BOOM! Next round…","g.win":"🏆 You survived! Winner!","g.lose":"💥 BOOM! You're out after {n} slaps."};
+const EN_GAME = {"share.text":"Check out Slap or Bomb on Roblox! 💣","share.copied":"Link copied! Send it to your friends 🎉","share.copy":"Copy the link:","fb.sending":"Sending…","fb.r1":"1/5 · Not good","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Good","fb.r4":"4/5 · Really good","fb.r5":"5/5 · Love it! 🔥","fb.e.empty":"Give a rating or write a message first.","fb.e.short":"Write a bit more so we understand you (at least 5 characters).","fb.e.wait":"Hold on a moment before sending again.","fb.e.fail":"Something went wrong. Try again, or tell us on Discord.","fb.done.t":"Thanks for your feedback! 🙌","fb.done.p":"We got your message. It helps us make Slap or Bomb better.","fb.again":"Send more feedback","fb.copy":"The feedback form is being set up right now. Your message was copied so you can paste it in our Discord.","shop.ingame":"See price in game","shop.get":"Get it","g.ready":"Press start!","g.start":"Start round","g.again":"Play again","g.you":"YOU","g.have":"You have it! SLAP SOMEONE!","g.tick":"Tick tick…","g.passed":"Slapped! 😅","g.next":"💥 BOOM! Next round…","g.win":"🏆 You survived! Winner!","g.lose":"💥 BOOM! You're out after {n} slaps."};
 const EN = {};
 document.querySelectorAll("[data-i18n]").forEach(el => EN[el.dataset.i18n] = el.innerHTML);
 document.querySelectorAll("[data-i18n-ph]").forEach(el => EN[el.dataset.i18nPh] = el.placeholder);
@@ -842,6 +851,16 @@ if (!reduced && matchMedia("(pointer: fine)").matches) {
   new IntersectionObserver(([e]) => { run = e.isIntersecting; if (run) { cancelAnimationFrame(raf); draw(); } }).observe(c);
 })();
 
+
+
+/* ---------- Share ---------- */
+const SITE_URL = "https://fred410r.github.io/slaporbomb-/";
+function toast(msg){ let el=document.querySelector(".toast"); if(!el){el=document.createElement("div");el.className="toast";el.setAttribute("role","status");document.body.appendChild(el);} el.textContent=msg; el.classList.add("show"); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove("show"),2600); }
+document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", async () => {
+  const data = { title: "Slap or Bomb", text: t("share.text"), url: SITE_URL };
+  if (navigator.share) { try { await navigator.share(data); return; } catch (e) { if (e.name === "AbortError") return; } }
+  try { await navigator.clipboard.writeText(SITE_URL); toast(t("share.copied")); } catch (e) { prompt(t("share.copy"), SITE_URL); }
+}));
 
 /* ---------- Feedback form ---------- */
 (() => {
