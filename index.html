@@ -964,6 +964,23 @@ document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", 
     round();
   });
 })();
+
+/* ---------- Visitor stats (anonymous counts only, free: abacus.jasoncameron.dev) ---------- */
+(() => {
+  const NS = "slaporbomb-site";
+  const hit = key => { try { fetch(`https://abacus.jasoncameron.dev/hit/${NS}/${key}`, { keepalive: true, mode: "no-cors" }).catch(() => {}); } catch (e) {} };
+  if (location.hostname === "localhost" || location.protocol === "file:") return;
+  hit("visits");
+  try { if (!localStorage.getItem("sob_seen")) { localStorage.setItem("sob_seen", "1"); hit("visitors"); } } catch (e) {}
+  const ref = (document.referrer || "").toLowerCase();
+  const src = /tiktok/.test(ref) ? "tiktok" : /discord/.test(ref) ? "discord" : /roblox/.test(ref) ? "roblox" : /youtube|youtu\.be/.test(ref) ? "youtube" : /google|bing|duckduckgo/.test(ref) ? "search" : ref && !ref.includes(location.hostname) ? "other" : "direct";
+  hit("from-" + src);
+  hit(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "device-mobile" : "device-pc");
+  const CLICKS = [[".js-play", "click-play"], [".js-discord", "click-discord"], [".js-share", "click-share"], [".buy a", "click-shop"], ["#start", "click-minigame"], ["#fbSend", "click-feedback"], ["[data-lang]", "click-lang"]];
+  document.addEventListener("click", e => {
+    for (const [sel, key] of CLICKS) if (e.target.closest(sel)) { hit(key); break; }
+  }, true);
+})();
 </script>
 </body>
 </html>

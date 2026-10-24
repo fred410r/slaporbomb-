@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Slap or Bomb · Besøg</title>
+<link rel="icon" href="assets/favicon.png">
+<style>
+  :root{--bg:#0b0a10;--card:#16141d;--line:#2a2633;--text:#f4efe6;--mute:#9a93a6;--gold:#ffb000}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px 16px 48px}
+  main{max-width:760px;margin:0 auto}
+  h1{font-size:28px;margin:0 0 4px}
+  h1 span{color:var(--gold)}
+  .sub{color:var(--mute);margin:0 0 24px;font-size:14px}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:28px 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .tile b{display:block;font-size:30px;font-variant-numeric:tabular-nums;color:var(--gold);line-height:1.2}
+  .tile small{color:var(--mute);font-size:13px}
+  .big .tile b{font-size:42px}
+  a{color:var(--gold)}
+</style>
+</head>
+<body>
+<main>
+  <h1>💣 Slap or Bomb <span>besøg</span></h1>
+  <p class="sub">Tal for <a href="./">hjemmesiden</a>. Opdaterer selv hvert 30. sek. · <span id="upd">henter…</span></p>
+  <div id="out"></div>
+</main>
+<script>
+const NS = "slaporbomb-site";
+const GROUPS = [
+  ["I alt", "big", [["visitors", "Personer (unikke)"], ["visits", "Sidevisninger"]]],
+  ["Klik", "", [["click-play", "▶ Play (til Roblox)"], ["click-discord", "Discord"], ["click-share", "Del-knappen"], ["click-shop", "Shop-køb"], ["click-minigame", "Mini-spil startet"], ["click-feedback", "Feedback sendt"], ["click-lang", "Skiftet sprog"]]],
+  ["Hvor kommer de fra?", "", [["from-tiktok", "TikTok"], ["from-discord", "Discord"], ["from-roblox", "Roblox"], ["from-youtube", "YouTube"], ["from-search", "Google / søgning"], ["from-other", "Andre sider"], ["from-direct", "Direkte link / app"]]],
+  ["Enhed", "", [["device-pc", "PC"], ["device-mobile", "Mobil"]]]
+];
+const get = k => fetch(`https://abacus.jasoncameron.dev/get/${NS}/${k}`).then(r => r.ok ? r.json() : { value: 0 }).then(j => j.value > 0 ? j.value : 0).catch(() => "–");
+async function load() {
+  const html = [];
+  for (const [title, cls, items] of GROUPS) {
+    const vals = await Promise.all(items.map(([k]) => get(k)));
+    html.push(`<h2>${title}</h2><div class="grid ${cls}">` + items.map(([, label], i) => `<div class="tile"><b>${vals[i].toLocaleString("da-DK")}</b><small>${label}</small></div>`).join("") + `</div>`);
+  }
+  document.getElementById("out").innerHTML = html.join("");
+  document.getElementById("upd").textContent = "opdateret " + new Date().toLocaleTimeString("da-DK");
+}
+load(); setInterval(load, 30000);
+</script>
+</body>
+</html>
