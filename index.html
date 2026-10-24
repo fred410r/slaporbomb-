@@ -267,6 +267,11 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 @media (max-width:900px){.beta{grid-template-columns:1fr;padding:32px 24px}}
 
 
+/* ---------- Motion (assets/vendor/motion, MIT) ---------- */
+.scroll-progress{position:fixed;left:0;top:0;right:0;height:3px;z-index:200;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);pointer-events:none;box-shadow:0 0 12px rgba(255,170,40,.7)}
+.motion .reveal,.motion .reveal.in{transition:none;transform:none}
+.motion .reveal:not([style*="opacity"]){opacity:0}
+.motion .hero .eyebrow,.motion .hero h1,.motion .hero .lead,.motion .hero .cta,.motion .hero .trust,.motion .hero .stage{opacity:0}
 /* ---------- Live ---------- */
 .live-dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,61,61,.7);animation:livePulse 1.6s infinite}
 @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(255,61,61,.7)}70%{box-shadow:0 0 0 12px rgba(255,61,61,0)}100%{box-shadow:0 0 0 0 rgba(255,61,61,0)}}
@@ -716,6 +721,7 @@ footer a:hover{color:var(--text)}
   </div>
 </footer>
 
+<script src="assets/vendor/motion-11.11.17.min.js"></script>
 <script>
 // ← Indsæt dine links her
 const ROBLOX_URL  = "https://www.roblox.com/games/107846844939325/slap-or-bomb";
@@ -1105,6 +1111,50 @@ document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", 
   tickAll(); setInterval(tickAll, 30000);
   document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { Object.keys(last).forEach(k => delete last[k]); tickAll(); }));
   document.addEventListener("visibilitychange", () => { if (!document.hidden) tickAll(); });
+})();
+/* ---------- Motion animations (self-hosted Motion library, free/MIT) ---------- */
+(() => {
+  if (!window.Motion || reduced) return;
+  const { animate, scroll, inView, stagger } = Motion;
+  const ease = [.2, .8, .2, 1];
+  document.documentElement.classList.add("motion");
+
+  // Hero entrance
+  animate(".hero h1", { opacity: [0, 1], scale: [.8, 1], filter: ["blur(14px)", "blur(0px)"] }, { duration: .9, ease, delay: .15 });
+  animate(".hero .eyebrow, .hero .lead, .hero .cta, .hero .trust", { opacity: [0, 1], y: [28, 0] }, { duration: .8, ease, delay: stagger(.12, { startDelay: .3 }) });
+  animate(".hero .stage", { opacity: [0, 1], scale: [.6, 1], rotate: [-12, 0] }, { type: "spring", bounce: .45, duration: 1.4, delay: .35 });
+
+  // Scroll progress bar + hero parallax
+  const bar = document.createElement("div"); bar.className = "scroll-progress"; document.body.appendChild(bar);
+  scroll(animate(bar, { scaleX: [0, 1] }, { ease: "linear" }));
+  const hero = document.querySelector(".hero");
+  scroll(animate(".hero .wrap > div:first-child", { y: [0, -90] }, { ease: "linear" }), { target: hero, offset: ["start start", "end start"] });
+  scroll(animate(".hero .glow", { scale: [1, 1.5], opacity: [.45, .1] }, { ease: "linear" }), { target: hero, offset: ["start start", "end start"] });
+
+  // Section reveals: springy, staggered per group
+  const batch = new Map();
+  inView(".reveal", info => {
+    const el = info.target || info; // Motion v11 passes the IntersectionObserver entry
+    const parent = el.parentElement, n = batch.get(parent) || 0; batch.set(parent, n + 1);
+    setTimeout(() => batch.set(parent, Math.max(0, (batch.get(parent) || 1) - 1)), 400);
+    const isHead = el.classList.contains("head");
+    animate(el, isHead ? { opacity: [0, 1], y: [36, 0], filter: ["blur(8px)", "blur(0px)"] } : { opacity: [0, 1], y: [60, 0], scale: [.94, 1] },
+      isHead ? { duration: .8, ease } : { type: "spring", bounce: .32, duration: .9, delay: Math.min(n, 6) * .09 });
+  }, { margin: "0px 0px -60px 0px" });
+
+  // Live tiles pop when a number changes
+  new MutationObserver(ms => ms.forEach(m => m.target.classList?.contains("bump") && animate(m.target, { scale: [1, 1.06, 1] }, { duration: .5, ease })))
+    .observe(document.querySelector(".live-grid") || document.body, { subtree: true, attributeFilter: ["class"] });
+
+  // Buttons squash on press, cards lift on hover
+  document.addEventListener("pointerdown", e => { const b = e.target.closest(".btn"); if (b) animate(b, { scale: [1, .92, 1.04, 1] }, { duration: .45, ease }); });
+  document.querySelectorAll(".map, .step, .tile, .lv").forEach(c => {
+    c.addEventListener("pointerenter", () => animate(c, { y: -6 }, { type: "spring", bounce: .5, duration: .5 }));
+    c.addEventListener("pointerleave", () => animate(c, { y: 0 }, { type: "spring", bounce: .4, duration: .5 }));
+  });
+
+  // Mini game: bomb explosion shake with Motion
+  document.addEventListener("sob:boom", () => animate("#arena", { scale: [1, 1.04, .98, 1], rotate: [0, -1.5, 1.5, 0] }, { duration: .45, ease }));
 })();
 </script>
 </body>
