@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Slap or Bomb | Roblox</title>
 <meta name="description" content="Slap or Bomb is a chaotic Roblox party game. Slap the bomb onto someone else before it explodes and be the last player standing. Open Beta, free to play.">
-<meta name="theme-color" content="#070a17">
+<meta name="theme-color" content="#0b0b0e">
 <meta property="og:title" content="Slap or Bomb | Open Beta on Roblox">
 <meta property="og:description" content="Slap it. Pass it. Don't be holding it when it blows. Play free on Roblox.">
 <meta property="og:image" content="https://fred410r.github.io/slaporbomb-/assets/og-image.jpg">
@@ -21,24 +21,24 @@
 <link rel="preload" as="image" href="assets/key-art-640.webp" imagesrcset="assets/key-art-640.webp 640w, assets/key-art-1254.webp 1254w" imagesizes="(min-width: 980px) 520px, 88vw" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070a17; --bg-2:#0c1230; --panel:rgba(255,255,255,.045); --panel-2:rgba(255,255,255,.08);
-  --line:rgba(255,255,255,.10); --text:#eef1ff; --muted:#a3abcf;
-  --gold:#ffc531; --orange:#ff7a18; --red:#ff3d3d; --blue:#3d7bff; --lime:#a6ff3d;
-  --grad:linear-gradient(135deg,#ffe066 0%,var(--gold) 30%,var(--orange) 70%,var(--red) 100%);
+  --bg:#0b0b0e; --bg-2:#141418; --panel:rgba(255,255,255,.035); --panel-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --text:#f4f1ea; --muted:#a9a5a0;
+  --gold:#e9c46a; --orange:#c8963e; --red:#d0694a; --blue:#8c8577; --lime:#f6dc9b;
+  --grad:linear-gradient(135deg,#f8e3a8 0%,#e9c46a 45%,#c8963e 100%);
   --r:22px; --ease:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:"Chakra Petch",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 [hidden]{display:none!important}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{width:min(1180px,100% - 32px);margin-inline:auto}
-.h{font-family:"Unbounded",system-ui,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.02}
+.h{font-family:"Russo One",system-ui,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.02}
 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 .eyebrow::before{content:"";width:22px;height:2px;background:var(--grad);border-radius:2px}
@@ -46,11 +46,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:10px}
 
 /* ---------- Buttons ---------- */
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Unbounded",sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em;padding:16px 26px;border-radius:14px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s}
-.btn-primary{background:var(--grad);color:#1a0d00;box-shadow:0 10px 30px -8px rgba(255,122,24,.65),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Russo One",sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em;padding:16px 26px;border-radius:14px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s}
+.btn-primary{background:var(--grad);color:#14110a;box-shadow:0 10px 30px -8px rgba(201,150,62,.65),inset 0 1px 0 rgba(255,255,255,.55)}
 .btn-primary::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);background-size:250% 100%;background-position:120% 0;transition:background-position .7s var(--ease)}
 .btn-primary:hover::after{background-position:-20% 0}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -8px rgba(255,122,24,.8),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -8px rgba(201,150,62,.8),inset 0 1px 0 rgba(255,255,255,.55)}
 .btn-ghost{background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(10px)}
 .btn-ghost:hover{background:var(--panel-2);transform:translateY(-2px)}
 .btn-sm{padding:10px 16px;font-size:13px;border-radius:11px}
@@ -58,11 +58,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* ---------- Nav ---------- */
 .nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
-.nav.solid{background:rgba(7,10,23,.72);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-color:var(--line)}
+.nav.solid{background:rgba(11,11,14,.72);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-color:var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:20px;height:70px}
-.logo{white-space:nowrap;display:flex;align-items:center;gap:10px;font-family:"Unbounded",sans-serif;font-weight:900;font-size:17px;letter-spacing:-.01em}
+.logo{white-space:nowrap;display:flex;align-items:center;gap:10px;font-family:"Russo One",sans-serif;font-weight:900;font-size:17px;letter-spacing:-.01em}
 .logo img{width:34px;height:34px;border-radius:9px;box-shadow:0 0 0 1px var(--line)}
-.pill{font-family:"Inter",sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(166,255,61,.12);color:var(--lime);border:1px solid rgba(166,255,61,.3)}
+.pill{font-family:"Chakra Petch",sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(246,220,155,.12);color:var(--lime);border:1px solid rgba(246,220,155,.3)}
 .nav-links{display:flex;gap:26px;margin-left:auto;list-style:none;font-size:14px;font-weight:500}
 .nav-links a{color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--text)}
@@ -76,9 +76,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;overflow:hidden;isolation:isolate}
 .hero-bg{position:absolute;inset:0;z-index:-2;
   background:
-    radial-gradient(42% 50% at 72% 46%,rgba(255,122,24,.32),transparent 70%),
-    radial-gradient(40% 45% at 20% 20%,rgba(61,123,255,.28),transparent 70%),
-    radial-gradient(60% 60% at 50% 120%,rgba(255,61,61,.25),transparent 70%),
+    radial-gradient(42% 50% at 72% 46%,rgba(201,150,62,.32),transparent 70%),
+    radial-gradient(40% 45% at 20% 20%,rgba(233,196,106,.28),transparent 70%),
+    radial-gradient(60% 60% at 50% 120%,rgba(208,105,74,.25),transparent 70%),
     var(--bg)}
 .hero-bg::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(70% 60% at 50% 40%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(70% 60% at 50% 40%,#000 20%,transparent 75%);opacity:.5}
 #sparks{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
@@ -96,8 +96,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .stage .glow{position:absolute;inset:-12%;z-index:-1;border-radius:50%;background:conic-gradient(from 0deg,var(--gold),var(--red),var(--blue),var(--lime),var(--gold));filter:blur(60px);opacity:.45;animation:spin 14s linear infinite}
 .card3d{position:relative;border-radius:28px;padding:10px;background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);box-shadow:0 40px 80px -30px rgba(0,0,0,.8);transform-style:preserve-3d;transition:transform .5s var(--ease);animation:float 6s ease-in-out infinite}
 .card3d img{width:100%;height:auto;aspect-ratio:1;border-radius:20px}
-.chip{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:rgba(12,18,48,.78);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:13px;font-weight:600;box-shadow:0 20px 40px -20px rgba(0,0,0,.8);transform:translateZ(40px)}
-.chip b{font-family:"Unbounded",sans-serif;font-size:15px;display:block;line-height:1.1}
+.chip{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:rgba(20,20,24,.78);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:13px;font-weight:600;box-shadow:0 20px 40px -20px rgba(0,0,0,.8);transform:translateZ(40px)}
+.chip b{font-family:"Russo One",sans-serif;font-size:15px;display:block;line-height:1.1}
 .chip small{color:var(--muted);font-weight:500}
 .chip.c1{left:-34px;top:16%}
 .chip.c2{right:-26px;bottom:12%}
@@ -124,9 +124,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 }
 
 /* ---------- Marquee ---------- */
-.marquee{border-block:1px solid var(--line);background:linear-gradient(90deg,rgba(255,197,49,.06),rgba(255,61,61,.06));overflow:hidden;padding:18px 0}
+.marquee{border-block:1px solid var(--line);background:linear-gradient(90deg,rgba(233,196,106,.06),rgba(208,105,74,.06));overflow:hidden;padding:18px 0}
 .marquee-track{display:flex;width:max-content;animation:marq 32s linear infinite}
-.marquee span{font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(20px,3vw,30px);letter-spacing:-.01em;padding:0 28px;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35)}
+.marquee span{font-family:"Russo One",sans-serif;font-weight:900;font-size:clamp(20px,3vw,30px);letter-spacing:-.01em;padding:0 28px;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35)}
 .marquee span:nth-child(3n+1){color:var(--text);-webkit-text-stroke:0}
 .marquee span:nth-child(3n+2){-webkit-text-stroke:0}
 .marquee span:nth-child(3n+2){background:var(--grad);-webkit-background-clip:text;background-clip:text}
@@ -147,8 +147,8 @@ section{padding:120px 0;position:relative}
 .loop{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
 .step{padding:28px 24px 30px}
 .step .num{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:26px;margin-bottom:22px;background:var(--bg-2);border:1px solid var(--line);position:relative;box-shadow:0 0 0 6px var(--bg)}
-.step .num em{position:absolute;top:-8px;right:-8px;font-style:normal;font-family:"Unbounded",sans-serif;font-size:11px;font-weight:800;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:var(--grad);color:#1a0d00}
-.step h3{font-family:"Unbounded",sans-serif;font-size:19px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
+.step .num em{position:absolute;top:-8px;right:-8px;font-style:normal;font-family:"Russo One",sans-serif;font-size:11px;font-weight:800;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:var(--grad);color:#14110a}
+.step h3{font-family:"Russo One",sans-serif;font-size:19px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
 .step p{color:var(--muted);font-size:15px}
 @media (max-width:980px){.loop{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.loop{grid-template-columns:1fr}}
@@ -156,7 +156,7 @@ section{padding:120px 0;position:relative}
 /* Rules + controls */
 .split{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:22px}
 .rules{padding:34px}
-.rules h3,.controls h3{font-family:"Unbounded",sans-serif;font-size:20px;font-weight:800;margin-bottom:20px}
+.rules h3,.controls h3{font-family:"Russo One",sans-serif;font-size:20px;font-weight:800;margin-bottom:20px}
 .rules ul{list-style:none;display:grid;gap:14px}
 .rules li{display:flex;gap:14px;align-items:flex-start;color:var(--muted)}
 .rules li b{color:var(--text);font-weight:600}
@@ -169,24 +169,24 @@ section{padding:120px 0;position:relative}
 .keys{display:grid;gap:12px}
 .keys div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:14px}
 .keys span{color:var(--muted)}
-.keys.soon p{padding:22px;border-radius:14px;background:rgba(255,197,49,.06);border:1px dashed rgba(255,197,49,.35);color:var(--muted);line-height:1.7}
+.keys.soon p{padding:22px;border-radius:14px;background:rgba(233,196,106,.06);border:1px dashed rgba(233,196,106,.35);color:var(--muted);line-height:1.7}
 .keys.soon b{color:var(--text);font-size:16px}
-kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9px;border-radius:7px;background:linear-gradient(#232a52,#161b3a);border:1px solid rgba(255,255,255,.14);border-bottom-width:3px;white-space:nowrap}
+kbd{font-family:"Chakra Petch",sans-serif;font-size:12px;font-weight:700;padding:5px 9px;border-radius:7px;background:linear-gradient(#232a52,#161b3a);border:1px solid rgba(255,255,255,.14);border-bottom-width:3px;white-space:nowrap}
 @media (max-width:900px){.split{grid-template-columns:1fr}.rules,.controls{padding:26px}}
 
 /* Showcase bento */
 .bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(220px,auto);gap:18px}
 .tile{padding:30px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .4s var(--ease),border-color .3s}
-.tile:hover{transform:translateY(-4px);border-color:rgba(255,197,49,.35)}
+.tile:hover{transform:translateY(-4px);border-color:rgba(233,196,106,.35)}
 .tile .ico{font-size:42px;margin-bottom:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5))}
-.tile h3{font-family:"Unbounded",sans-serif;font-size:22px;font-weight:800;margin:18px 0 8px;letter-spacing:-.01em}
+.tile h3{font-family:"Russo One",sans-serif;font-size:22px;font-weight:800;margin:18px 0 8px;letter-spacing:-.01em}
 .tile p{color:var(--muted);font-size:15px;max-width:420px}
-.tile.t1{grid-column:span 4;grid-row:span 2;background:linear-gradient(180deg,rgba(7,10,23,0) 30%,rgba(7,10,23,.92) 100%),var(--scene) center/cover no-repeat;min-height:440px}
+.tile.t1{grid-column:span 4;grid-row:span 2;background:linear-gradient(180deg,rgba(11,11,14,0) 30%,rgba(11,11,14,.92) 100%),var(--scene) center/cover no-repeat;min-height:440px}
 .tile.t1 h3{font-size:clamp(26px,3vw,36px)}
-.tile.t2{grid-column:span 2;background:radial-gradient(80% 80% at 80% 0%,rgba(255,197,49,.22),transparent 60%),var(--panel)}
-.tile.t3{grid-column:span 2;background:radial-gradient(80% 80% at 80% 0%,rgba(255,61,61,.22),transparent 60%),var(--panel)}
-.tile.t4{grid-column:span 3;background:radial-gradient(80% 80% at 90% 0%,rgba(61,123,255,.25),transparent 60%),var(--panel)}
-.tile.t5{grid-column:span 3;background:radial-gradient(80% 80% at 90% 0%,rgba(166,255,61,.18),transparent 60%),var(--panel)}
+.tile.t2{grid-column:span 2;background:radial-gradient(80% 80% at 80% 0%,rgba(233,196,106,.22),transparent 60%),var(--panel)}
+.tile.t3{grid-column:span 2;background:radial-gradient(80% 80% at 80% 0%,rgba(208,105,74,.22),transparent 60%),var(--panel)}
+.tile.t4{grid-column:span 3;background:radial-gradient(80% 80% at 90% 0%,rgba(233,196,106,.25),transparent 60%),var(--panel)}
+.tile.t5{grid-column:span 3;background:radial-gradient(80% 80% at 90% 0%,rgba(246,220,155,.18),transparent 60%),var(--panel)}
 .tag{display:inline-block;width:max-content;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--muted)}
 @media (max-width:980px){.bento{grid-template-columns:1fr 1fr}.tile.t1{grid-column:span 2;grid-row:auto;min-height:360px}.tile.t2,.tile.t3,.tile.t4,.tile.t5{grid-column:span 1}}
 @media (max-width:600px){.bento{grid-template-columns:1fr}.tile.t1,.tile.t2,.tile.t3,.tile.t4,.tile.t5{grid-column:auto}}
@@ -194,21 +194,21 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 
 
 /* Maps */
-.boss{display:grid;grid-template-columns:1.45fr 1fr;align-items:center;gap:0;margin-bottom:22px;border-color:rgba(255,122,24,.35);background:radial-gradient(60% 100% at 100% 50%,rgba(255,61,61,.18),transparent 70%),var(--panel)}
+.boss{display:grid;grid-template-columns:1.45fr 1fr;align-items:center;gap:0;margin-bottom:22px;border-color:rgba(201,150,62,.35);background:radial-gradient(60% 100% at 100% 50%,rgba(208,105,74,.18),transparent 70%),var(--panel)}
 .boss img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9}
 .boss .txt{padding:34px 38px}
-.boss h3{font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,44px);line-height:1.05;margin:14px 0 12px;letter-spacing:-.02em}
+.boss h3{font-family:"Russo One",sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,44px);line-height:1.05;margin:14px 0 12px;letter-spacing:-.02em}
 .boss p{color:var(--muted);margin-bottom:24px}
-.new{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:var(--red);color:#fff;box-shadow:0 0 0 4px rgba(255,61,61,.2)}
+.new{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:var(--red);color:#fff;box-shadow:0 0 0 4px rgba(208,105,74,.2)}
 .new::before{content:"";width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s ease-in-out infinite}
 @keyframes blink{50%{opacity:.25}}
 .maps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .map{position:relative;aspect-ratio:2/1;padding:0}
 .map img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .map:hover img{transform:scale(1.07)}
-.map::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(7,10,23,.92));pointer-events:none}
+.map::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(11,11,14,.92));pointer-events:none}
 .map .cap{position:absolute;left:18px;right:18px;bottom:14px;z-index:1}
-.map h3{font-family:"Unbounded",sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em}
+.map h3{font-family:"Russo One",sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em}
 .map span{font-size:13px;color:var(--muted)}
 @media (max-width:980px){.boss{grid-template-columns:1fr}.boss .txt{padding:26px 24px 30px}.maps{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.maps{grid-template-columns:1fr}}
@@ -217,24 +217,24 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:-24px 0 40px}
 .filters button{padding:10px 18px;border-radius:99px;font-size:14px;font-weight:600;color:var(--muted);background:var(--panel);border:1px solid var(--line);transition:all .2s}
 .filters button:hover{color:var(--text)}
-.filters button[aria-pressed="true"]{color:#1a0d00;background:var(--grad);border-color:transparent}
+.filters button[aria-pressed="true"]{color:#14110a;background:var(--grad);border-color:transparent}
 .shop{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .item{display:flex;flex-direction:column;padding:14px 14px 18px;transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
-.item:hover{transform:translateY(-6px);border-color:rgba(255,197,49,.4);box-shadow:0 24px 50px -24px rgba(255,122,24,.55)}
+.item:hover{transform:translateY(-6px);border-color:rgba(233,196,106,.4);box-shadow:0 24px 50px -24px rgba(201,150,62,.55)}
 .item .pic{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;background:var(--bg-2)}
 .item .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .item:hover .pic img{transform:scale(1.06)}
-.item .kind{position:absolute;top:10px;left:10px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;background:rgba(7,10,23,.75);backdrop-filter:blur(6px);border:1px solid var(--line)}
-.item h3{font-family:"Unbounded",sans-serif;font-size:17px;font-weight:800;margin:16px 4px 6px;letter-spacing:-.01em}
+.item .kind{position:absolute;top:10px;left:10px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;background:rgba(11,11,14,.75);backdrop-filter:blur(6px);border:1px solid var(--line)}
+.item h3{font-family:"Russo One",sans-serif;font-size:17px;font-weight:800;margin:16px 4px 6px;letter-spacing:-.01em}
 .item p{color:var(--muted);font-size:14px;margin:0 4px 16px;flex:1}
 .item .buy{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 4px}
-.price{font-family:"Unbounded",sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;gap:6px}
+.price{font-family:"Russo One",sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;gap:6px}
 .price svg{width:16px;height:16px}
-.price.tbd{font-family:"Inter",sans-serif;font-weight:600;font-size:13px;color:var(--muted)}
-.item.hot{grid-column:span 2;grid-row:span 2;padding:18px 18px 24px;background:radial-gradient(70% 60% at 50% 0%,rgba(255,122,24,.22),transparent 70%),var(--panel);border-color:rgba(255,197,49,.35)}
+.price.tbd{font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:13px;color:var(--muted)}
+.item.hot{grid-column:span 2;grid-row:span 2;padding:18px 18px 24px;background:radial-gradient(70% 60% at 50% 0%,rgba(201,150,62,.22),transparent 70%),var(--panel);border-color:rgba(233,196,106,.35)}
 .item.hot h3{font-size:clamp(22px,2.4vw,30px)}
 .item.hot p{font-size:16px}
-.item.hot .kind{background:var(--grad);color:#1a0d00;border:0}
+.item.hot .kind{background:var(--grad);color:#14110a;border:0}
 .shop-note{text-align:center;color:var(--muted);font-size:13px;margin-top:28px}
 @media (max-width:1000px){.shop{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:760px){.shop{grid-template-columns:repeat(2,1fr);gap:12px}.item{padding:10px 10px 14px}.item h3{font-size:15px;margin:12px 2px 4px}.item p{font-size:13px;margin:0 2px 12px}.item .buy{margin:0 2px;flex-wrap:wrap}.item .btn-sm{padding:8px 12px;font-size:12px}}
@@ -242,12 +242,12 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 /* Mini game */
 .arena{max-width:760px;margin:0 auto;padding:40px 28px 36px;text-align:center}
 .arena.boom{animation:shake .45s}
-.status{font-family:"Unbounded",sans-serif;font-weight:800;font-size:clamp(18px,2.4vw,24px);min-height:36px}
+.status{font-family:"Russo One",sans-serif;font-weight:800;font-size:clamp(18px,2.4vw,24px);min-height:36px}
 .players{display:flex;justify-content:center;gap:clamp(12px,4vw,36px);margin:34px 0 14px}
 .player{position:relative;width:clamp(62px,15vw,88px);aspect-ratio:1;border-radius:22px;display:grid;place-items:center;font-size:clamp(28px,7vw,40px);background:var(--bg-2);border:1px solid var(--line);transition:transform .2s var(--ease),box-shadow .2s,opacity .3s}
 .player:not(.out):hover{transform:translateY(-4px)}
 .player.p1{box-shadow:inset 0 -6px 0 #f2c200}.player.p2{box-shadow:inset 0 -6px 0 var(--red)}.player.p3{box-shadow:inset 0 -6px 0 var(--blue)}.player.p4{box-shadow:inset 0 -6px 0 var(--lime)}
-.player.has{transform:translateY(-10px) scale(1.06);border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,197,49,.25),0 18px 40px -10px rgba(255,122,24,.7)}
+.player.has{transform:translateY(-10px) scale(1.06);border-color:var(--gold);box-shadow:0 0 0 4px rgba(233,196,106,.25),0 18px 40px -10px rgba(201,150,62,.7)}
 .player.has::after{content:"💣";position:absolute;top:-34px;font-size:30px;animation:wobble .28s ease-in-out infinite alternate}
 .player.out{opacity:.3;filter:grayscale(1);cursor:default}
 .player.you::before{content:attr(data-you);position:absolute;bottom:-26px;font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--gold)}
@@ -258,7 +258,7 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 @keyframes shake{0%,100%{transform:none}20%{transform:translate(-8px,4px)}40%{transform:translate(8px,-4px)}60%{transform:translate(-6px,-3px)}80%{transform:translate(6px,3px)}}
 
 /* Beta */
-.beta{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:56px;align-items:center;background:radial-gradient(60% 90% at 0% 0%,rgba(166,255,61,.14),transparent 60%),radial-gradient(60% 90% at 100% 100%,rgba(61,123,255,.18),transparent 60%),var(--panel)}
+.beta{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:56px;align-items:center;background:radial-gradient(60% 90% at 0% 0%,rgba(246,220,155,.14),transparent 60%),radial-gradient(60% 90% at 100% 100%,rgba(233,196,106,.18),transparent 60%),var(--panel)}
 .beta h2{font-size:clamp(30px,4vw,48px);margin:16px 0}
 .beta .eyebrow{color:var(--lime)}
 .beta .eyebrow::before{background:var(--lime)}
@@ -267,6 +267,34 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 @media (max-width:900px){.beta{grid-template-columns:1fr;padding:32px 24px}}
 
 
+/* ---------- Premium theme (Obsidian & Gold) ---------- */
+html{font-synthesis:none}
+body{letter-spacing:.005em}
+.btn{border-radius:999px;font-weight:400;letter-spacing:.04em}
+.btn-sm{border-radius:999px}
+.btn-primary{box-shadow:0 12px 34px -12px rgba(233,196,106,.55),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-ghost{border-color:rgba(255,255,255,.16)}
+.eyebrow{font-weight:600;letter-spacing:.28em}
+.eyebrow::before{height:1px;width:32px;background:var(--gold)}
+main{counter-reset:sec}
+.head>.eyebrow{counter-increment:sec}
+.head>.eyebrow::before{content:counter(sec,decimal-leading-zero) "  \2014";width:auto;height:auto;background:none;letter-spacing:.12em;color:var(--gold);white-space:pre}
+.panel{border-color:rgba(255,255,255,.08)}
+.panel::before{background:linear-gradient(160deg,rgba(233,196,106,.28),transparent 38%)}
+.hero h1 .or{color:var(--gold);font-weight:400}
+.hero .w-bomb{color:var(--text)}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.trust i .ic{width:15px;height:15px;color:var(--gold)}
+.chip .ic{width:26px;height:26px;color:var(--gold)}
+.step .num{color:var(--gold)}.step .num .ic{width:26px;height:26px}
+.tile .ico{color:var(--gold);width:58px;height:58px;display:grid;place-items:center;border-radius:16px;border:1px solid rgba(233,196,106,.35);background:rgba(233,196,106,.06);filter:none}
+.tile .ico .ic{width:28px;height:28px}
+.lv .ico{color:var(--gold)}.lv .ico .ic{width:24px;height:24px}
+.fb-side li>span:first-child{color:var(--gold);padding-top:2px}
+.fuse-line b .ic{width:22px;height:22px;fill:var(--gold);stroke:none}
+.h{font-weight:400;letter-spacing:-.01em}
+.head h2{line-height:1.08}
+::selection{background:rgba(233,196,106,.35);color:#fff}
 /* ---------- Motion (assets/vendor/motion, MIT) ---------- */
 .scroll-progress{position:fixed;left:0;top:0;right:0;height:3px;z-index:200;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);pointer-events:none;box-shadow:0 0 12px rgba(255,170,40,.7)}
 .motion .reveal,.motion .reveal.in{transition:none;transform:none}
@@ -278,7 +306,7 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 .intro .ifuse{position:absolute;left:50%;top:calc(50% + min(15vw,100px));width:min(60vw,320px);height:6px;translate:-50% 0;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
 .intro .ifuse i{position:absolute;inset:0;background:var(--grad);transform-origin:0 50%}
 .intro .iflash{position:absolute;inset:0;background:radial-gradient(circle,#fff,#ffd36b 30%,#ff5a00 60%,transparent 80%);opacity:0;pointer-events:none}
-.intro .itxt{position:absolute;font-family:Unbounded,sans-serif;font-weight:900;font-size:min(18vw,150px);color:#fff;opacity:0;text-shadow:0 0 40px rgba(255,140,0,.9)}
+.intro .itxt{position:absolute;font-family:"Russo One",sans-serif;font-weight:900;font-size:min(18vw,150px);color:#fff;opacity:0;text-shadow:0 0 40px rgba(255,140,0,.9)}
 .cursor-glow{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(255,170,40,.13),transparent 65%);opacity:0;transition:opacity .4s}
 .fuse-line{display:none}
 @media (min-width:981px){
@@ -292,35 +320,35 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 .head .grad{background-size:220% 100%;animation:shine 5s linear infinite}
 @keyframes shine{from{background-position:0% 0}to{background-position:-220% 0}}
 /* ---------- Live ---------- */
-.live-dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,61,61,.7);animation:livePulse 1.6s infinite}
-@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(255,61,61,.7)}70%{box-shadow:0 0 0 12px rgba(255,61,61,0)}100%{box-shadow:0 0 0 0 rgba(255,61,61,0)}}
+.live-dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(208,105,74,.7);animation:livePulse 1.6s infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(208,105,74,.7)}70%{box-shadow:0 0 0 12px rgba(208,105,74,0)}100%{box-shadow:0 0 0 0 rgba(208,105,74,0)}}
 #live .eyebrow{color:#ff8a8a}
 .live-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media (max-width:860px){.live-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:480px){.live-grid{gap:10px}}
 .lv{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px 22px 20px;transition:border-color .3s,transform .3s var(--ease)}
-.lv:hover{transform:translateY(-3px);border-color:rgba(255,197,49,.35)}
-.lv::after{content:"";position:absolute;inset:auto -30% -60% auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,24,.18),transparent 70%);pointer-events:none}
+.lv:hover{transform:translateY(-3px);border-color:rgba(233,196,106,.35)}
+.lv::after{content:"";position:absolute;inset:auto -30% -60% auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(201,150,62,.18),transparent 70%);pointer-events:none}
 .lv .ico{font-size:22px}
-.lv b{display:block;font-family:Unbounded,system-ui,sans-serif;font-size:clamp(28px,4.2vw,44px);line-height:1.1;margin:10px 0 4px;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lv b{display:block;font-family:"Russo One",system-ui,sans-serif;font-size:clamp(28px,4.2vw,44px);line-height:1.1;margin:10px 0 4px;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .lv span.l{color:var(--text);font-weight:600;font-size:15px}
 .lv small{display:block;color:var(--muted);font-size:13px;margin-top:2px;min-height:1.3em}
 .lv.bump{animation:lvBump .7s var(--ease)}
-@keyframes lvBump{0%{border-color:var(--gold);box-shadow:0 0 0 0 rgba(255,197,49,.5)}100%{box-shadow:0 0 0 18px rgba(255,197,49,0)}}
+@keyframes lvBump{0%{border-color:var(--gold);box-shadow:0 0 0 0 rgba(233,196,106,.5)}100%{box-shadow:0 0 0 18px rgba(233,196,106,0)}}
 .lv.on b{background:none;color:var(--lime)}
 .live-upd{text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
 .feed{position:fixed;left:18px;bottom:18px;z-index:98;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:calc(100vw - 36px)}
-.feed div{display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:14px;background:rgba(16,22,58,.92);border:1px solid rgba(255,197,49,.35);font-size:14px;font-weight:600;box-shadow:0 16px 36px -10px rgba(0,0,0,.7);backdrop-filter:blur(8px);animation:feedIn .45s var(--ease) both}
+.feed div{display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:14px;background:rgba(20,20,24,.92);border:1px solid rgba(233,196,106,.35);font-size:14px;font-weight:600;box-shadow:0 16px 36px -10px rgba(0,0,0,.7);backdrop-filter:blur(8px);animation:feedIn .45s var(--ease) both}
 .feed div.out{animation:feedOut .4s var(--ease) forwards}
 .feed .live-dot{flex:none}
 @keyframes feedIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
 @keyframes feedOut{to{opacity:0;transform:translateX(-24px)}}
-.toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;opacity:0;z-index:99;padding:14px 20px;border-radius:14px;background:#1a2250;border:1px solid rgba(255,197,49,.4);font-weight:600;box-shadow:0 20px 40px -10px rgba(0,0,0,.7);transition:all .3s var(--ease);pointer-events:none}
+.toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;opacity:0;z-index:99;padding:14px 20px;border-radius:14px;background:#18181d;border:1px solid rgba(233,196,106,.4);font-weight:600;box-shadow:0 20px 40px -10px rgba(0,0,0,.7);transition:all .3s var(--ease);pointer-events:none}
 .toast.show{opacity:1;translate:-50% 0}
 /* Feedback */
 .fb{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:start}
 .fb-side{padding:34px}
-.fb-side h3{font-family:"Unbounded",sans-serif;font-weight:800;font-size:22px;margin-bottom:10px}
+.fb-side h3{font-family:"Russo One",sans-serif;font-weight:800;font-size:22px;margin-bottom:10px}
 .fb-side p{color:var(--muted);margin-bottom:22px}
 .fb-side ul{list-style:none;display:grid;gap:12px;margin-bottom:26px}
 .fb-side li{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:15px}
@@ -331,18 +359,18 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 .stars{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:6px}
 .stars input{position:absolute;opacity:0;pointer-events:none}
 .stars label{margin:0;font-size:40px;line-height:1;cursor:pointer;color:rgba(255,255,255,.15);transition:color .15s,transform .15s;text-transform:none;letter-spacing:0}
-.stars label:hover,.stars label:hover~label,.stars input:checked~label{color:var(--gold);text-shadow:0 0 18px rgba(255,197,49,.5)}
+.stars label:hover,.stars label:hover~label,.stars input:checked~label{color:var(--gold);text-shadow:0 0 18px rgba(233,196,106,.5)}
 .stars label:hover{transform:scale(1.15)}
 .stars input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
 .rate-txt{font-size:14px;color:var(--gold);min-height:20px;margin-top:6px;font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips input{position:absolute;opacity:0;pointer-events:none}
 .chips label{margin:0;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;transition:all .15s}
-.chips input:checked+label{background:rgba(255,197,49,.12);border-color:rgba(255,197,49,.55);color:var(--text)}
+.chips input:checked+label{background:rgba(233,196,106,.12);border-color:rgba(233,196,106,.55);color:var(--text)}
 .chips input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
 .fb-form textarea,.fb-form input[type=text]{width:100%;font:inherit;font-size:16px;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .2s,box-shadow .2s}
 .fb-form textarea{min-height:140px;resize:vertical}
-.fb-form textarea:focus,.fb-form input[type=text]:focus{outline:none;border-color:rgba(255,197,49,.6);box-shadow:0 0 0 4px rgba(255,197,49,.12)}
+.fb-form textarea:focus,.fb-form input[type=text]:focus{outline:none;border-color:rgba(233,196,106,.6);box-shadow:0 0 0 4px rgba(233,196,106,.12)}
 .fb-row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .count{font-size:12px;color:var(--muted)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -350,7 +378,7 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 .fb-msg.err{color:#ff8a8a}.fb-msg.ok{color:var(--lime)}
 .fb-done{text-align:center;padding:60px 34px}
 .fb-done .big{font-size:56px;margin-bottom:12px}
-.fb-done h3{font-family:"Unbounded",sans-serif;font-weight:800;font-size:26px;margin-bottom:10px}
+.fb-done h3{font-family:"Russo One",sans-serif;font-weight:800;font-size:26px;margin-bottom:10px}
 .fb-done p{color:var(--muted);margin-bottom:24px}
 @media (max-width:900px){.fb{grid-template-columns:1fr}.fb-side,.fb-form{padding:26px 22px}.stars label{font-size:36px}}
 
@@ -366,7 +394,7 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 
 /* Final CTA */
 .final{text-align:center;overflow:hidden;isolation:isolate}
-.final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 55% at 50% 50%,rgba(7,10,23,.82),rgba(7,10,23,.55) 100%),linear-gradient(180deg,var(--bg) 0%,transparent 35%,rgba(7,10,23,.7) 100%),var(--scene) center 30%/cover no-repeat}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 55% at 50% 50%,rgba(11,11,14,.82),rgba(11,11,14,.55) 100%),linear-gradient(180deg,var(--bg) 0%,transparent 35%,rgba(11,11,14,.7) 100%),var(--scene) center 30%/cover no-repeat}
 .final h2{font-size:clamp(40px,7vw,96px);margin-bottom:22px}
 .final p{color:var(--muted);font-size:19px;margin:0 auto 36px;max-width:560px}
 .final .cta{justify-content:center}
@@ -426,9 +454,9 @@ footer a:hover{color:var(--text)}
         <a class="btn btn-ghost" href="#how" data-i18n="cta.how">How it works</a>
       </div>
       <div class="trust">
-        <span><i>🆓</i><span data-i18n="trust.free">Free to play</span></span>
-        <span><i>👥</i><span data-i18n="trust.friends">Play with friends</span></span>
-        <span><i>💻</i><span data-i18n="trust.devices">PC only · mobile coming soon</span></span>
+        <span><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg></i><span data-i18n="trust.free">Free to play</span></span>
+        <span><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></i><span data-i18n="trust.friends">Play with friends</span></span>
+        <span><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></i><span data-i18n="trust.devices">PC only · mobile coming soon</span></span>
       </div>
     </div>
     <div class="stage">
@@ -442,7 +470,7 @@ footer a:hover{color:var(--text)}
           <div class="timer"><svg viewBox="0 0 42 42"><circle class="t-bg" cx="21" cy="21" r="18"/><circle class="t-fg" cx="21" cy="21" r="18"/></svg><span>💣</span></div>
           <div><b data-i18n="chip.fuse">Fuse lit</b><small data-i18n="chip.fuseSub">Pass it. Now.</small></div>
         </div>
-        <div class="chip c2"><span style="font-size:26px">🖐</span><div><b data-i18n="chip.slap">SLAP!</b><small data-i18n="chip.slapSub">Bomb passed</small></div></div>
+        <div class="chip c2"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.3l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15"/></svg><div><b data-i18n="chip.slap">SLAP!</b><small data-i18n="chip.slapSub">Bomb passed</small></div></div>
       </div>
     </div>
   </div>
@@ -467,12 +495,12 @@ footer a:hover{color:var(--text)}
         <p data-i18n="live.sub">Real numbers straight from Roblox and Discord. Updates by itself.</p>
       </div>
       <div class="live-grid reveal">
-        <div class="lv" id="lv-playing" hidden><div class="ico">🎮</div><b>0</b><span class="l" data-i18n="live.playing">Playing right now</span><small></small></div>
-        <div class="lv" id="lv-visits" hidden><div class="ico">🚀</div><b>0</b><span class="l" data-i18n="live.visits">Game visits</span><small></small></div>
-        <div class="lv" id="lv-discord" hidden><div class="ico">💬</div><b>0</b><span class="l" data-i18n="live.discord">Online on Discord</span><small></small></div>
-        <div class="lv" id="lv-fav" hidden><div class="ico">⭐</div><b>0</b><span class="l" data-i18n="live.fav">Favorites</span><small></small></div>
-        <div class="lv" id="lv-site" hidden><div class="ico">🌐</div><b>0</b><span class="l" data-i18n="live.site">Website visitors</span><small></small></div>
-        <div class="lv" id="lv-bombs" hidden><div class="ico">💥</div><b>0</b><span class="l" data-i18n="live.bombs">Bombs exploded here</span><small data-i18n="live.bombs.s">In the mini game, by everyone</small></div>
+        <div class="lv" id="lv-playing" hidden><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/></svg></div><b>0</b><span class="l" data-i18n="live.playing">Playing right now</span><small></small></div>
+        <div class="lv" id="lv-visits" hidden><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg></div><b>0</b><span class="l" data-i18n="live.visits">Game visits</span><small></small></div>
+        <div class="lv" id="lv-discord" hidden><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><b>0</b><span class="l" data-i18n="live.discord">Online on Discord</span><small></small></div>
+        <div class="lv" id="lv-fav" hidden><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><b>0</b><span class="l" data-i18n="live.fav">Favorites</span><small></small></div>
+        <div class="lv" id="lv-site" hidden><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div><b>0</b><span class="l" data-i18n="live.site">Website visitors</span><small></small></div>
+        <div class="lv" id="lv-bombs" hidden><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.2 5.6L20 6l-3.4 5L22 14l-5.9.9L17 21l-5-3.6L7 21l.9-6.1L2 14l5.4-3L4 6l5.8 1.6z"/></svg></div><b>0</b><span class="l" data-i18n="live.bombs">Bombs exploded here</span><small data-i18n="live.bombs.s">In the mini game, by everyone</small></div>
       </div>
       <p class="live-upd"><span id="lvGame"></span><span id="lvUpd"></span></p>
     </div>
@@ -487,11 +515,11 @@ footer a:hover{color:var(--text)}
       </div>
 
       <div class="loop">
-        <div class="fuse-line" aria-hidden="true"><i></i><b>🔥</b></div>
-        <article class="panel step reveal"><div class="num">🏟️<em>1</em></div><h3 data-i18n="s1.t">Drop into the arena</h3><p data-i18n="s1.p">All players spawn together in a blocky arena. Get moving and find some space. The round is about to start.</p></article>
-        <article class="panel step reveal d1"><div class="num">💣<em>2</em></div><h3 data-i18n="s2.t">The bomb is lit</h3><p data-i18n="s2.p">One random player gets the bomb and the fuse starts burning. Nobody knows exactly when it will go off.</p></article>
-        <article class="panel step reveal d2"><div class="num">🖐<em>3</em></div><h3 data-i18n="s3.t">Slap to pass it</h3><p data-i18n="s3.p">Holding the bomb? Chase someone down and slap them. The bomb jumps to them, and now they're the one panicking.</p></article>
-        <article class="panel step reveal d3"><div class="num">💥<em>4</em></div><h3 data-i18n="s4.t">BOOM. Last one wins</h3><p data-i18n="s4.p">When the fuse runs out, whoever holds the bomb is out. New bomb, new round, until one survivor is left.</p></article>
+        <div class="fuse-line" aria-hidden="true"><i></i><b><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></b></div>
+        <article class="panel step reveal"><div class="num"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg><em>1</em></div><h3 data-i18n="s1.t">Drop into the arena</h3><p data-i18n="s1.p">All players spawn together in a blocky arena. Get moving and find some space. The round is about to start.</p></article>
+        <article class="panel step reveal d1"><div class="num"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="14" r="7.5"/><path d="m15.5 8.5 2.5-2.5M19 2v2M22 5h-2M21 3l-1 1"/></svg><em>2</em></div><h3 data-i18n="s2.t">The bomb is lit</h3><p data-i18n="s2.p">One random player gets the bomb and the fuse starts burning. Nobody knows exactly when it will go off.</p></article>
+        <article class="panel step reveal d2"><div class="num"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.3l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15"/></svg><em>3</em></div><h3 data-i18n="s3.t">Slap to pass it</h3><p data-i18n="s3.p">Holding the bomb? Chase someone down and slap them. The bomb jumps to them, and now they're the one panicking.</p></article>
+        <article class="panel step reveal d3"><div class="num"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.2 5.6L20 6l-3.4 5L22 14l-5.9.9L17 21l-5-3.6L7 21l.9-6.1L2 14l5.4-3L4 6l5.8 1.6z"/></svg><em>4</em></div><h3 data-i18n="s4.t">BOOM. Last one wins</h3><p data-i18n="s4.p">When the fuse runs out, whoever holds the bomb is out. New bomb, new round, until one survivor is left.</p></article>
       </div>
 
       <div class="split">
@@ -518,7 +546,7 @@ footer a:hover{color:var(--text)}
             <div><span data-i18n="k.cam">Camera</span><kbd data-i18n="k.rmb">Right mouse</kbd></div>
           </div>
           <div class="keys soon" data-panel="mobile" hidden>
-            <p><b data-i18n="soon.t">📱 Mobile is coming!</b><br><span data-i18n="soon.p">Slap or Bomb is PC only right now. We are working on mobile support and it will arrive in a future update.</span></p>
+            <p><b data-i18n="soon.t">Mobile is coming!</b><br><span data-i18n="soon.p">Slap or Bomb is PC only right now. We are working on mobile support and it will arrive in a future update.</span></p>
           </div>
         </div>
       </div>
@@ -538,10 +566,10 @@ footer a:hover{color:var(--text)}
           <h3 data-i18n="t1.t">Party chaos with friends</h3>
           <p data-i18n="t1.p">Join a server with friends or strangers. Every round turns into a screaming chase the second the fuse is lit.</p>
         </div>
-        <div class="panel tile t2 reveal d1"><div class="ico">🧤</div><h3 data-i18n="t2.t">Gloves</h3><p data-i18n="t2.p">Slap in style. Pick the glove that fits your playstyle.</p></div>
-        <div class="panel tile t3 reveal d2"><div class="ico">💣</div><h3 data-i18n="t3.t">Bomb skins</h3><p data-i18n="t3.p">Make the bomb yours, so everyone knows who to blame.</p></div>
-        <div class="panel tile t4 reveal"><div class="ico">🕺</div><h3 data-i18n="t4.t">Dances</h3><p data-i18n="t4.p">Survived the blast? Celebrate in front of everyone who didn't.</p></div>
-        <div class="panel tile t5 reveal d1"><div class="ico">🗺️</div><h3 data-i18n="t5.t">Maps & modes</h3><p data-i18n="t5.p">Colorful blocky arenas full of ramps, walls and hiding spots. More on the way.</p></div>
+        <div class="panel tile t2 reveal d1"><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.3l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15"/></svg></div><h3 data-i18n="t2.t">Gloves</h3><p data-i18n="t2.p">Slap in style. Pick the glove that fits your playstyle.</p></div>
+        <div class="panel tile t3 reveal d2"><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="14" r="7.5"/><path d="m15.5 8.5 2.5-2.5M19 2v2M22 5h-2M21 3l-1 1"/></svg></div><h3 data-i18n="t3.t">Bomb skins</h3><p data-i18n="t3.p">Make the bomb yours, so everyone knows who to blame.</p></div>
+        <div class="panel tile t4 reveal"><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3 data-i18n="t4.t">Dances</h3><p data-i18n="t4.p">Survived the blast? Celebrate in front of everyone who didn't.</p></div>
+        <div class="panel tile t5 reveal d1"><div class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3z"/><path d="M9 3v15M15 6v15"/></svg></div><h3 data-i18n="t5.t">Maps & modes</h3><p data-i18n="t5.p">Colorful blocky arenas full of ramps, walls and hiding spots. More on the way.</p></div>
       </div>
     </div>
   </section>
@@ -653,10 +681,10 @@ footer a:hover{color:var(--text)}
           <h3 data-i18n="fb.side.t">What should I write?</h3>
           <p data-i18n="fb.side.p">The more specific, the better. Short is fine too.</p>
           <ul>
-            <li><span>⭐</span><span data-i18n="fb.l1"><b>Rating:</b> how fun is the game right now?</span></li>
-            <li><span>🐛</span><span data-i18n="fb.l2"><b>Bugs:</b> what happened and what were you doing?</span></li>
-            <li><span>💡</span><span data-i18n="fb.l3"><b>Ideas:</b> new maps, gloves, bomb skins, modes…</span></li>
-            <li><span>💬</span><span data-i18n="fb.l4"><b>Anything else:</b> what would make you play more?</span></li>
+            <li><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span data-i18n="fb.l1"><b>Rating:</b> how fun is the game right now?</span></li>
+            <li><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="6" width="8" height="14" rx="4"/><path d="M12 20v-8M3 13h5M16 13h5M4 7l4 2M20 7l-4 2M4 19l4-2M20 19l-4-2M9 6a3 3 0 0 1 6 0"/></svg></span><span data-i18n="fb.l2"><b>Bugs:</b> what happened and what were you doing?</span></li>
+            <li><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span><span data-i18n="fb.l3"><b>Ideas:</b> new maps, gloves, bomb skins, modes…</span></li>
+            <li><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span data-i18n="fb.l4"><b>Anything else:</b> what would make you play more?</span></li>
           </ul>
           <a class="btn btn-ghost js-discord" href="#" target="_blank" rel="noopener"><span data-i18n="fb.discord">Or chat with us on Discord</span></a>
         </aside>
@@ -676,10 +704,10 @@ footer a:hover{color:var(--text)}
             <fieldset>
               <legend data-i18n="fb.type">What is it about?</legend>
               <div class="chips">
-                <input type="radio" name="kind" id="k1" value="Feedback" checked><label for="k1" data-i18n="fb.k1">💬 Feedback</label>
-                <input type="radio" name="kind" id="k2" value="Bug"><label for="k2" data-i18n="fb.k2">🐛 Bug / problem</label>
-                <input type="radio" name="kind" id="k3" value="Idea"><label for="k3" data-i18n="fb.k3">💡 Idea</label>
-                <input type="radio" name="kind" id="k4" value="Other"><label for="k4" data-i18n="fb.k4">✨ Other</label>
+                <input type="radio" name="kind" id="k1" value="Feedback" checked><label for="k1" data-i18n="fb.k1">Feedback</label>
+                <input type="radio" name="kind" id="k2" value="Bug"><label for="k2" data-i18n="fb.k2">Bug / problem</label>
+                <input type="radio" name="kind" id="k3" value="Idea"><label for="k3" data-i18n="fb.k3">Idea</label>
+                <input type="radio" name="kind" id="k4" value="Other"><label for="k4" data-i18n="fb.k4">Other</label>
               </div>
             </fieldset>
             <div>
@@ -777,7 +805,7 @@ const DA = {
   "r3":"<b>Brug banen.</b> Vægge, ramper og hjørner kan redde dig eller fange dig.",
   "r4":"<b>Slap hurtigt, løb hurtigere.</b> Når du har sendt bomben, så kom væk, før den kommer tilbage.",
   "r5":"<b>Den sidste, der står tilbage, vinder</b> kampen. Og så gør I det hele igen.",
-  "ctrl.t":"Styring","tab.mobile":"Mobil (snart)","soon.t":"📱 Mobil er på vej!","soon.p":"Slap or Bomb er kun til PC lige nu. Vi arbejder på mobil, og det kommer i en fremtidig opdatering.","k.move":"Bevæg dig","k.jump":"Hop","k.slap":"Slap","k.cam":"Kamera","k.click":"Venstreklik","k.rmb":"Højre musetast",
+  "ctrl.t":"Styring","tab.mobile":"Mobil (snart)","soon.t":"Mobil er på vej!","soon.p":"Slap or Bomb er kun til PC lige nu. Vi arbejder på mobil, og det kommer i en fremtidig opdatering.","k.move":"Bevæg dig","k.jump":"Hop","k.slap":"Slap","k.cam":"Kamera","k.click":"Venstreklik","k.rmb":"Højre musetast",
   "k.stick":"Joystick","k.jumpBtn":"Hop-knap","k.slapBtn":"Slap-knap","k.swipe":"Swipe",
   "feat.eyebrow":"Features","feat.title":"Bygget til <span class=\"grad\">ren kaos</span>","feat.sub":"Let at lære, umuligt at spille roligt. Tag dine venner med og find ud af, hvem der går i panik først.",
   "t1.tag":"Multiplayer","t1.t":"Partykaos med venner","t1.p":"Hop på en server med venner eller fremmede. Hver runde bliver til en skrigende jagt, så snart lunten er tændt.",
@@ -799,7 +827,7 @@ const DA = {
   "f4.q":"Hvad betyder \"Open Beta\"?","f4.a":"Spillet kan spilles nu, men det bliver stadig bygget. Forvent opdateringer, nyt indhold og en enkelt bug i ny og næ. Din feedback former, hvad der kommer.",
   "f5.q":"Hvordan melder jeg en bug?","f5.a":"Fortæl hvad der skete, hvad du lavede, og hvilken enhed du spillede på. Et screenshot hjælper meget.",
   "final.title":"Lunten er <span class=\"grad\">allerede tændt.</span>","final.p":"Hop ind, tag dine venner med og find ud af, hvem der holder bomben, når den springer.",
-  "foot.by":"Lavet af","share.btn":"Del med vennerne","share.short":"Del","share.text":"Tjek Slap or Bomb på Roblox! 💣","share.copied":"Link kopieret! Send det til dine venner 🎉","share.copy":"Kopiér linket:","nav.fb":"Feedback","beta.fb":"Giv feedback","fb.eyebrow":"Feedback","fb.title":"Giv spillet en rating. <span class=\"grad\">Fortæl os alt.</span>","fb.sub":"Elskede du det? Fandt du en bug? Har du en vild idé? Udvikleren læser hver eneste besked.","fb.side.t":"Hvad skal jeg skrive?","fb.side.p":"Jo mere præcist, jo bedre. Kort er også fint.","fb.l1":"<b>Rating:</b> hvor sjovt er spillet lige nu?","fb.l2":"<b>Bugs:</b> hvad skete der, og hvad lavede du?","fb.l3":"<b>Idéer:</b> nye baner, handsker, bombe-skins, modes…","fb.l4":"<b>Alt andet:</b> hvad ville få dig til at spille mere?","fb.discord":"Eller skriv med os på Discord","fb.rate":"Din rating","fb.type":"Hvad handler det om?","fb.k1":"💬 Feedback","fb.k2":"🐛 Bug / problem","fb.k3":"💡 Idé","fb.k4":"✨ Andet","fb.msg":"Din besked","fb.msg.ph":"Fortæl os hvad du synes…","fb.name":"Roblox-brugernavn (valgfrit)","fb.name.ph":"Så vi kan takke dig i spillet","fb.send":"Send feedback","fb.sending":"Sender…","fb.r1":"1/5 · Ikke godt","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Godt","fb.r4":"4/5 · Rigtig godt","fb.r5":"5/5 · Elsker det! 🔥","fb.e.empty":"Giv en rating eller skriv en besked først.","fb.e.short":"Skriv lidt mere, så vi forstår dig (mindst 5 tegn).","fb.e.wait":"Vent lige et øjeblik, før du sender igen.","fb.e.fail":"Noget gik galt. Prøv igen, eller skriv på Discord.","fb.done.t":"Tak for din feedback! 🙌","fb.done.p":"Vi har modtaget din besked. Den hjælper os med at gøre Slap or Bomb bedre.","fb.again":"Send mere feedback","fb.copy":"Feedback-formularen bliver sat op lige nu. Din besked er kopieret, så du kan sætte den ind på vores Discord.","nav.shop":"Shop","nav.maps":"Baner","maps.eyebrow":"Baner","maps.title":"Vælg din <span class=\"grad\">slagmark</span>","maps.sub":"Hver bane spilles forskelligt. Lær hjørnerne, genvejene og gemmestederne at kende.","boss.new":"Ny opdatering","boss.t":"Boss Event","boss.p":"En helt ny boss-arena. Gå sammen med alle på serveren og nedlæg den kæmpe Bomb Boss, før den sprænger jer alle i luften.","boss.cta":"Spil Boss Event","m1.t":"Den mørke borg","m1.p":"Uhyggelige tårne og lysende fakler.","m2.t":"Togstationen","m2.p":"Undvig mellem perroner og skinner.","m3.t":"Havnen","m3.p":"En flydende arena midt i havnen.","m4.t":"Forlystelsesparken","m4.p":"Forlystelser, raketter og masser af løb.","m5.t":"Skovarenaen","m5.p":"Træer og broer at gemme sig bag.","m6.t":"Himmeløen","m6.p":"Højt over skyerne. Fald ikke ned.","shop.eyebrow":"Game Passes og shop","shop.title":"Boost dit <span class=\"grad\">kaos</span>","shop.sub":"Game passes, power moves og møntpakker, som du kan købe inde i spillet.","sf.all":"Alle","sf.pass":"Game Passes","sf.power":"Power moves","sf.coins":"Mønter","sf.support":"Støt","shop.note":"Alle køb foregår med Robux inde i Roblox.","shop.ingame":"Se pris i spillet","shop.get":"Køb","foot.na":"Ikke tilknyttet Roblox Corporation."
+  "foot.by":"Lavet af","share.btn":"Del med vennerne","share.short":"Del","share.text":"Tjek Slap or Bomb på Roblox! 💣","share.copied":"Link kopieret! Send det til dine venner 🎉","share.copy":"Kopiér linket:","nav.fb":"Feedback","beta.fb":"Giv feedback","fb.eyebrow":"Feedback","fb.title":"Giv spillet en rating. <span class=\"grad\">Fortæl os alt.</span>","fb.sub":"Elskede du det? Fandt du en bug? Har du en vild idé? Udvikleren læser hver eneste besked.","fb.side.t":"Hvad skal jeg skrive?","fb.side.p":"Jo mere præcist, jo bedre. Kort er også fint.","fb.l1":"<b>Rating:</b> hvor sjovt er spillet lige nu?","fb.l2":"<b>Bugs:</b> hvad skete der, og hvad lavede du?","fb.l3":"<b>Idéer:</b> nye baner, handsker, bombe-skins, modes…","fb.l4":"<b>Alt andet:</b> hvad ville få dig til at spille mere?","fb.discord":"Eller skriv med os på Discord","fb.rate":"Din rating","fb.type":"Hvad handler det om?","fb.k1":"Feedback","fb.k2":"Bug / problem","fb.k3":"Idé","fb.k4":"Andet","fb.msg":"Din besked","fb.msg.ph":"Fortæl os hvad du synes…","fb.name":"Roblox-brugernavn (valgfrit)","fb.name.ph":"Så vi kan takke dig i spillet","fb.send":"Send feedback","fb.sending":"Sender…","fb.r1":"1/5 · Ikke godt","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Godt","fb.r4":"4/5 · Rigtig godt","fb.r5":"5/5 · Elsker det! 🔥","fb.e.empty":"Giv en rating eller skriv en besked først.","fb.e.short":"Skriv lidt mere, så vi forstår dig (mindst 5 tegn).","fb.e.wait":"Vent lige et øjeblik, før du sender igen.","fb.e.fail":"Noget gik galt. Prøv igen, eller skriv på Discord.","fb.done.t":"Tak for din feedback! 🙌","fb.done.p":"Vi har modtaget din besked. Den hjælper os med at gøre Slap or Bomb bedre.","fb.again":"Send mere feedback","fb.copy":"Feedback-formularen bliver sat op lige nu. Din besked er kopieret, så du kan sætte den ind på vores Discord.","nav.shop":"Shop","nav.maps":"Baner","maps.eyebrow":"Baner","maps.title":"Vælg din <span class=\"grad\">slagmark</span>","maps.sub":"Hver bane spilles forskelligt. Lær hjørnerne, genvejene og gemmestederne at kende.","boss.new":"Ny opdatering","boss.t":"Boss Event","boss.p":"En helt ny boss-arena. Gå sammen med alle på serveren og nedlæg den kæmpe Bomb Boss, før den sprænger jer alle i luften.","boss.cta":"Spil Boss Event","m1.t":"Den mørke borg","m1.p":"Uhyggelige tårne og lysende fakler.","m2.t":"Togstationen","m2.p":"Undvig mellem perroner og skinner.","m3.t":"Havnen","m3.p":"En flydende arena midt i havnen.","m4.t":"Forlystelsesparken","m4.p":"Forlystelser, raketter og masser af løb.","m5.t":"Skovarenaen","m5.p":"Træer og broer at gemme sig bag.","m6.t":"Himmeløen","m6.p":"Højt over skyerne. Fald ikke ned.","shop.eyebrow":"Game Passes og shop","shop.title":"Boost dit <span class=\"grad\">kaos</span>","shop.sub":"Game passes, power moves og møntpakker, som du kan købe inde i spillet.","sf.all":"Alle","sf.pass":"Game Passes","sf.power":"Power moves","sf.coins":"Mønter","sf.support":"Støt","shop.note":"Alle køb foregår med Robux inde i Roblox.","shop.ingame":"Se pris i spillet","shop.get":"Køb","foot.na":"Ikke tilknyttet Roblox Corporation."
 };
 const EN_GAME = {"share.text":"Check out Slap or Bomb on Roblox! 💣","share.copied":"Link copied! Send it to your friends 🎉","share.copy":"Copy the link:","fb.sending":"Sending…","fb.r1":"1/5 · Not good","fb.r2":"2/5 · Okay-ish","fb.r3":"3/5 · Good","fb.r4":"4/5 · Really good","fb.r5":"5/5 · Love it! 🔥","fb.e.empty":"Give a rating or write a message first.","fb.e.short":"Write a bit more so we understand you (at least 5 characters).","fb.e.wait":"Hold on a moment before sending again.","fb.e.fail":"Something went wrong. Try again, or tell us on Discord.","fb.done.t":"Thanks for your feedback! 🙌","fb.done.p":"We got your message. It helps us make Slap or Bomb better.","fb.again":"Send more feedback","fb.copy":"The feedback form is being set up right now. Your message was copied so you can paste it in our Discord.","shop.ingame":"See price in game","shop.get":"Get it","g.ready":"Press start!","g.start":"Start round","g.again":"Play again","g.you":"YOU","g.have":"You have it! SLAP SOMEONE!","g.tick":"Tick tick…","g.passed":"Slapped! 😅","g.next":"💥 BOOM! Next round…","g.win":"🏆 You survived! Winner!","g.lose":"💥 BOOM! You're out after {n} slaps."};
 const EN = {};
@@ -904,7 +932,7 @@ if (!reduced && matchMedia("(pointer: fine)").matches) {
   const c = document.getElementById("sparks"), ctx = c.getContext("2d");
   let w, h, dpr, ps = [], run = true, raf;
   const size = () => { dpr = Math.min(devicePixelRatio || 1, 2); w = c.offsetWidth; h = c.offsetHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
-  const spawn = (init) => ({ x: Math.random() * w, y: init ? Math.random() * h : h + 10, r: Math.random() * 2.2 + .6, vy: Math.random() * .7 + .3, vx: (Math.random() - .5) * .4, a: Math.random() * .6 + .3, hue: 20 + Math.random() * 30 });
+  const spawn = (init) => ({ x: Math.random() * w, y: init ? Math.random() * h : h + 10, r: Math.random() * 2.2 + .6, vy: Math.random() * .7 + .3, vx: (Math.random() - .5) * .4, a: Math.random() * .6 + .3, hue: 36 + Math.random() * 12 });
   size(); addEventListener("resize", size);
   const N = w < 700 ? 34 : 70; for (let i = 0; i < N; i++) ps.push(spawn(true));
   const draw = () => {
@@ -913,7 +941,7 @@ if (!reduced && matchMedia("(pointer: fine)").matches) {
       p.y -= p.vy; p.x += p.vx + Math.sin(p.y / 40) * .2;
       if (p.y < -10) Object.assign(p, spawn(false));
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
-      ctx.fillStyle = `hsla(${p.hue},100%,60%,${p.a * Math.min(1, p.y / h + .2)})`; ctx.fill();
+      ctx.fillStyle = `hsla(${p.hue},75%,70%,${p.a * Math.min(1, p.y / h + .2)})`; ctx.fill();
     }
     if (run) raf = requestAnimationFrame(draw);
   };
