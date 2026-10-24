@@ -267,6 +267,30 @@ kbd{font-family:"Inter",sans-serif;font-size:12px;font-weight:700;padding:5px 9p
 @media (max-width:900px){.beta{grid-template-columns:1fr;padding:32px 24px}}
 
 
+/* ---------- Live ---------- */
+.live-dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,61,61,.7);animation:livePulse 1.6s infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(255,61,61,.7)}70%{box-shadow:0 0 0 12px rgba(255,61,61,0)}100%{box-shadow:0 0 0 0 rgba(255,61,61,0)}}
+#live .eyebrow{color:#ff8a8a}
+.live-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:860px){.live-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.live-grid{gap:10px}}
+.lv{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px 22px 20px;transition:border-color .3s,transform .3s var(--ease)}
+.lv:hover{transform:translateY(-3px);border-color:rgba(255,197,49,.35)}
+.lv::after{content:"";position:absolute;inset:auto -30% -60% auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,24,.18),transparent 70%);pointer-events:none}
+.lv .ico{font-size:22px}
+.lv b{display:block;font-family:Unbounded,system-ui,sans-serif;font-size:clamp(28px,4.2vw,44px);line-height:1.1;margin:10px 0 4px;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lv span.l{color:var(--text);font-weight:600;font-size:15px}
+.lv small{display:block;color:var(--muted);font-size:13px;margin-top:2px;min-height:1.3em}
+.lv.bump{animation:lvBump .7s var(--ease)}
+@keyframes lvBump{0%{border-color:var(--gold);box-shadow:0 0 0 0 rgba(255,197,49,.5)}100%{box-shadow:0 0 0 18px rgba(255,197,49,0)}}
+.lv.on b{background:none;color:var(--lime)}
+.live-upd{text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
+.feed{position:fixed;left:18px;bottom:18px;z-index:98;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:calc(100vw - 36px)}
+.feed div{display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:14px;background:rgba(16,22,58,.92);border:1px solid rgba(255,197,49,.35);font-size:14px;font-weight:600;box-shadow:0 16px 36px -10px rgba(0,0,0,.7);backdrop-filter:blur(8px);animation:feedIn .45s var(--ease) both}
+.feed div.out{animation:feedOut .4s var(--ease) forwards}
+.feed .live-dot{flex:none}
+@keyframes feedIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+@keyframes feedOut{to{opacity:0;transform:translateX(-24px)}}
 .toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;opacity:0;z-index:99;padding:14px 20px;border-radius:14px;background:#1a2250;border:1px solid rgba(255,197,49,.4);font-weight:600;box-shadow:0 20px 40px -10px rgba(0,0,0,.7);transition:all .3s var(--ease);pointer-events:none}
 .toast.show{opacity:1;translate:-50% 0}
 /* Feedback */
@@ -411,6 +435,25 @@ footer a:hover{color:var(--text)}
 </div>
 
 <main>
+  <section id="live" hidden style="padding-top:90px;padding-bottom:30px">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow"><i class="live-dot"></i><span data-i18n="live.eyebrow">Live right now</span></span>
+        <h2 class="h" data-i18n="live.title">The arena is <span class="grad">live</span></h2>
+        <p data-i18n="live.sub">Real numbers straight from Roblox and Discord. Updates by itself.</p>
+      </div>
+      <div class="live-grid reveal">
+        <div class="lv" id="lv-playing" hidden><div class="ico">🎮</div><b>0</b><span class="l" data-i18n="live.playing">Playing right now</span><small></small></div>
+        <div class="lv" id="lv-visits" hidden><div class="ico">🚀</div><b>0</b><span class="l" data-i18n="live.visits">Game visits</span><small></small></div>
+        <div class="lv" id="lv-discord" hidden><div class="ico">💬</div><b>0</b><span class="l" data-i18n="live.discord">Online on Discord</span><small></small></div>
+        <div class="lv" id="lv-fav" hidden><div class="ico">⭐</div><b>0</b><span class="l" data-i18n="live.fav">Favorites</span><small></small></div>
+        <div class="lv" id="lv-site" hidden><div class="ico">🌐</div><b>0</b><span class="l" data-i18n="live.site">Website visitors</span><small></small></div>
+        <div class="lv" id="lv-bombs" hidden><div class="ico">💥</div><b>0</b><span class="l" data-i18n="live.bombs">Bombs exploded here</span><small data-i18n="live.bombs.s">In the mini game, by everyone</small></div>
+      </div>
+      <p class="live-upd"><span id="lvGame"></span><span id="lvUpd"></span></p>
+    </div>
+  </section>
+
   <section id="how">
     <div class="wrap">
       <div class="head reveal">
@@ -946,7 +989,7 @@ document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", 
   };
   const end = () => { start.disabled = false; start.dataset.i18n = "g.again"; start.textContent = t("g.again"); };
   const boom = () => {
-    clearInterval(timer);
+    clearInterval(timer); document.dispatchEvent(new Event("sob:boom"));
     arena.classList.remove("boom"); void arena.offsetWidth; arena.classList.add("boom");
     const out = holder; players[out].classList.remove("has"); players[out].classList.add("out"); players[out].textContent = "💀";
     alive = alive.filter(i => i !== out); holder = -1;
@@ -980,6 +1023,88 @@ document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", 
   document.addEventListener("click", e => {
     for (const [sel, key] of CLICKS) if (e.target.closest(sel)) { hit(key); break; }
   }, true);
+})();
+/* ---------- Live numbers (Roblox via roproxy, Discord invite API, site counters via abacus) ---------- */
+(() => {
+  const UNIVERSE = 10768722175, INVITE = "fc5FvMkdkc", NS = "slaporbomb-site";
+  const AB = "https://abacus.jasoncameron.dev";
+  Object.assign(EN, {"live.zero":"Servers are open. Be the first in!","live.now":"Join them now 🔥","live.of":"of {n} members","live.since":"since the Open Beta","live.favs":"players saved the game","live.siteS":"people checked out this site","live.upd":"Updated {t}","live.gameUpd":"Game updated {t} · ","f.play":"Someone just hit Play 🎮","f.visit":"New visitor on the site 👋","f.tiktok":"Someone just came from TikTok 🎵","f.discord":"Someone just joined the Discord 💬","f.bomb":"A bomb just exploded somewhere 💥","f.online":"{n} playing Slap or Bomb right now!"});
+  Object.assign(DA, {"live.eyebrow":"Live lige nu","live.title":"Arenaen er <span class=\"grad\">live</span>","live.sub":"Rigtige tal direkte fra Roblox og Discord. Opdaterer helt af sig selv.","live.playing":"Spiller lige nu","live.visits":"Besøg i spillet","live.discord":"Online på Discord","live.fav":"Favoritter","live.site":"Besøgende på siden","live.bombs":"Bomber sprængt her","live.bombs.s":"I mini-spillet, af alle","live.zero":"Serverne er åbne. Vær den første!","live.now":"Hop ind til dem nu 🔥","live.of":"ud af {n} medlemmer","live.since":"siden Open Beta","live.favs":"spillere har gemt spillet","live.siteS":"har tjekket siden ud","live.upd":"Opdateret {t}","live.gameUpd":"Spillet opdateret {t} · ","f.play":"Nogen trykkede lige Play 🎮","f.visit":"Ny besøgende på siden 👋","f.tiktok":"Nogen kom lige fra TikTok 🎵","f.discord":"Nogen hoppede lige ind på Discord 💬","f.bomb":"En bombe sprang lige et sted 💥","f.online":"{n} spiller Slap or Bomb lige nu!"});
+  if (lang === "da") setLang("da");
+
+  const json = url => fetch(url, { cache: "no-store" }).then(r => r.ok ? r.json() : Promise.reject(r.status));
+  const fmt = n => n.toLocaleString(lang === "da" ? "da-DK" : "en-US");
+  const ago = iso => { const s = (Date.now() - new Date(iso)) / 1000, rtf = new Intl.RelativeTimeFormat(lang, { numeric: "auto" });
+    for (const [u, n] of [["day", 86400], ["hour", 3600], ["minute", 60]]) if (s >= n) return rtf.format(-Math.floor(s / n), u);
+    return rtf.format(0, "minute"); };
+  const anim = (el, to) => {
+    const from = +el.dataset.v || 0; el.dataset.v = to; if (from === to && el.textContent !== "0") return;
+    const t0 = performance.now(), d = 1100;
+    const step = now => { const p = Math.min(1, (now - t0) / d), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(Math.round(from + (to - from) * e)); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  const last = {};
+  const tile = (id, val, note) => {
+    const el = document.getElementById(id); if (!el) return;
+    el.hidden = false; document.getElementById("live").hidden = false; anim(el.querySelector("b"), val);
+    if (note !== undefined) el.querySelector("small").textContent = note;
+    if (last[id] !== undefined && val > last[id]) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+    last[id] = val;
+  };
+
+  const feedBox = document.createElement("div"); feedBox.className = "feed"; feedBox.setAttribute("aria-live", "polite"); document.body.appendChild(feedBox);
+  const feed = msg => {
+    const d = document.createElement("div"); d.innerHTML = `<i class="live-dot"></i>`; d.append(msg); feedBox.appendChild(d);
+    while (feedBox.children.length > 3) feedBox.firstChild.remove();
+    setTimeout(() => { d.classList.add("out"); setTimeout(() => d.remove(), 450); }, 5200);
+  };
+
+  let game = null;
+  const roblox = async () => {
+    try {
+      const g = (await json(`https://games.roproxy.com/v1/games?universeIds=${UNIVERSE}`)).data[0];
+      const playing = g.playing || 0, el = document.getElementById("lv-playing");
+      tile("lv-playing", playing, t(playing ? "live.now" : "live.zero")); el.classList.toggle("on", playing > 0);
+      tile("lv-visits", g.visits, t("live.since"));
+      tile("lv-fav", g.favoritedCount, t("live.favs"));
+      if (game && playing > game.playing) feed(t("f.online").replace("{n}", playing));
+      game = g;
+    } catch (e) {}
+  };
+  const discord = async () => {
+    try {
+      const d = await json(`https://discord.com/api/v9/invites/${INVITE}?with_counts=true`);
+      const prev = last["lv-discord-m"]; last["lv-discord-m"] = d.approximate_member_count;
+      tile("lv-discord", d.approximate_presence_count, t("live.of").replace("{n}", fmt(d.approximate_member_count)));
+      if (prev !== undefined && d.approximate_member_count > prev) feed(t("f.discord"));
+    } catch (e) {}
+  };
+  const KEYS = ["visitors", "bombs", "click-play", "from-tiktok"], seen = {};
+  const site = async () => {
+    const vals = await Promise.all(KEYS.map(k => json(`${AB}/get/${NS}/${k}`).then(j => Math.max(0, j.value)).catch(e => e === 404 ? 0 : null)));
+    const v = Object.fromEntries(KEYS.map((k, i) => [k, vals[i]]));
+    if (v.visitors !== null) tile("lv-site", v.visitors, t("live.siteS"));
+    if (v.bombs !== null) tile("lv-bombs", v.bombs + mine, t("live.bombs.s"));
+    const msgs = { "click-play": "f.play", "from-tiktok": "f.tiktok", visitors: "f.visit", bombs: "f.bomb" };
+    for (const k of ["from-tiktok", "click-play", "visitors", "bombs"]) {
+      if (v[k] === null) continue;
+      if (seen[k] !== undefined && v[k] > seen[k] + (k === "bombs" ? mineSince : 0)) { feed(t(msgs[k])); break; }
+    }
+    KEYS.forEach(k => { if (v[k] !== null) seen[k] = v[k]; }); mineSince = 0;
+  };
+  let mine = 0, mineSince = 0;
+  document.addEventListener("sob:boom", () => {
+    mineSince++;
+    fetch(`${AB}/hit/${NS}/bombs`).then(r => r.json()).then(j => { seen.bombs = j.value; tile("lv-bombs", j.value, t("live.bombs.s")); }).catch(() => {});
+  });
+  const stamp = () => {
+    document.getElementById("lvUpd").textContent = t("live.upd").replace("{t}", new Date().toLocaleTimeString(lang === "da" ? "da-DK" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+    document.getElementById("lvGame").textContent = game ? t("live.gameUpd").replace("{t}", ago(game.updated)) : "";
+  };
+  const tickAll = async () => { if (document.hidden) return; await Promise.all([roblox(), discord(), site()]); stamp(); };
+  tickAll(); setInterval(tickAll, 30000);
+  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { Object.keys(last).forEach(k => delete last[k]); tickAll(); }));
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) tickAll(); });
 })();
 </script>
 </body>
