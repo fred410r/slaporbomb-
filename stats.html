@@ -32,7 +32,7 @@
 <script>
 const NS = "slaporbomb-site";
 const GROUPS = [
-  ["I alt", "big", [["visitors", "Personer (unikke)"], ["visits", "Sidevisninger"]]],
+  ["I alt", "big", [["people", "Personer (unikke)"], ["=views", "Sidevisninger"]]],
   ["Klik", "", [["click-play", "▶ Play (til Roblox)"], ["click-discord", "Discord"], ["click-share", "Del-knappen"], ["click-shop", "Shop-køb"], ["click-minigame", "Mini-spil startet"], ["click-feedback", "Feedback sendt"], ["click-lang", "Skiftet sprog"]]],
   ["Hvor kommer de fra?", "", [["from-tiktok", "TikTok"], ["from-discord", "Discord"], ["from-roblox", "Roblox"], ["from-youtube", "YouTube"], ["from-search", "Google / søgning"], ["from-other", "Andre sider"], ["from-direct", "Direkte link / app"]]],
   ["Enhed", "", [["device-pc", "PC"], ["device-mobile", "Mobil"]]]
@@ -41,7 +41,7 @@ const get = k => fetch(`https://abacus.jasoncameron.dev/get/${NS}/${k}`).then(r 
 async function load() {
   const html = [];
   for (const [title, cls, items] of GROUPS) {
-    const vals = await Promise.all(items.map(([k]) => get(k)));
+    const vals = await Promise.all(items.map(([k]) => k === "=views" ? Promise.all([get("device-pc"), get("device-mobile")]).then(([a, b]) => (+a || 0) + (+b || 0)) : get(k)));
     html.push(`<h2>${title}</h2><div class="grid ${cls}">` + items.map(([, label], i) => `<div class="tile"><b>${vals[i].toLocaleString("da-DK")}</b><small>${label}</small></div>`).join("") + `</div>`);
   }
   document.getElementById("out").innerHTML = html.join("");

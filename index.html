@@ -1092,8 +1092,7 @@ document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", 
   const NS = "slaporbomb-site";
   const hit = key => { try { fetch(`https://abacus.jasoncameron.dev/hit/${NS}/${key}`, { keepalive: true, mode: "no-cors" }).catch(() => {}); } catch (e) {} };
   if (location.hostname === "localhost" || location.protocol === "file:") return;
-  hit("visits");
-  try { if (!localStorage.getItem("sob_seen")) { localStorage.setItem("sob_seen", "1"); hit("visitors"); } } catch (e) {}
+  try { if (!localStorage.getItem("sob_seen")) { localStorage.setItem("sob_seen", "1"); hit("people"); } } catch (e) {}
   const ref = (document.referrer || "").toLowerCase();
   const src = /tiktok/.test(ref) ? "tiktok" : /discord/.test(ref) ? "discord" : /roblox/.test(ref) ? "roblox" : /youtube|youtu\.be/.test(ref) ? "youtube" : /google|bing|duckduckgo/.test(ref) ? "search" : ref && !ref.includes(location.hostname) ? "other" : "direct";
   hit("from-" + src);
@@ -1158,18 +1157,20 @@ document.querySelectorAll(".js-share").forEach(b => b.addEventListener("click", 
       if (prev !== undefined && d.approximate_member_count > prev) feed(t("f.discord"));
     } catch (e) {}
   };
-  const KEYS = ["visitors", "bombs", "click-play", "from-tiktok"], seen = {};
+  const KEYS = ["people", "device-pc", "device-mobile", "bombs", "click-play", "from-tiktok"], seen = {};
   const site = async () => {
     const vals = await Promise.all(KEYS.map(k => json(`${AB}/get/${NS}/${k}`).then(j => Math.max(0, j.value)).catch(e => e === 404 ? 0 : null)));
     const v = Object.fromEntries(KEYS.map((k, i) => [k, vals[i]]));
-    if (v.visitors !== null) tile("lv-site", v.visitors, t("live.siteS"));
+    // page views = one device hit per load; "people" = unique browsers (falls back to views)
+    v.views = (v["device-pc"] || 0) + (v["device-mobile"] || 0);
+    if (v["device-pc"] !== null || v["device-mobile"] !== null) tile("lv-site", v.people > 0 ? v.people : v.views, t("live.siteS"));
     if (v.bombs !== null) tile("lv-bombs", v.bombs + mine, t("live.bombs.s"));
-    const msgs = { "click-play": "f.play", "from-tiktok": "f.tiktok", visitors: "f.visit", bombs: "f.bomb" };
-    for (const k of ["from-tiktok", "click-play", "visitors", "bombs"]) {
+    const msgs = { "click-play": "f.play", "from-tiktok": "f.tiktok", views: "f.visit", bombs: "f.bomb" };
+    for (const k of ["from-tiktok", "click-play", "views", "bombs"]) {
       if (v[k] === null) continue;
       if (seen[k] !== undefined && v[k] > seen[k] + (k === "bombs" ? mineSince : 0)) { feed(t(msgs[k])); break; }
     }
-    KEYS.forEach(k => { if (v[k] !== null) seen[k] = v[k]; }); mineSince = 0;
+    KEYS.concat("views").forEach(k => { if (v[k] !== null) seen[k] = v[k]; }); mineSince = 0;
   };
   let mine = 0, mineSince = 0;
   document.addEventListener("sob:boom", () => {
